@@ -9,6 +9,7 @@ export async function getPlates() {
 
         apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION,
 
+        useCdn: process.env.NODE_ENV === 'production',
     })
 
     return client.fetch(groq`*[_type == "plate"]{
