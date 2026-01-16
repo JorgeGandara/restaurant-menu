@@ -80,4 +80,4 @@ Este proyecto está bajo la licencia MIT.
 
 ---
 
-Hecho con ❤️ por [Jorge](https://github.com/JorgeGandara)
+Hecho con ❤️ por [Multiware](https://www.instagram.com/multiware.dev/)
