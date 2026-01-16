@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Gabarito, Poppins } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -17,13 +17,30 @@ export const metadata: Metadata = {
   description: "by multiware",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`
+          ${geistSans.variable}
+          ${geistMono.variable}
+          antialiased
+          min-h-screen
+          bg-cover
+          bg-center
+          bg-no-repeat
+        `}
+        style={{
+          backgroundImage: "url('/images/fondo.png')"
+        }}
       >
-        {children}
+        <div className="min-h-screen bg-white/67">
+          {children}
+        </div>
       </body>
     </html>
   );
