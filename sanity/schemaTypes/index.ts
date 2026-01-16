@@ -1,5 +1,6 @@
 import { type SchemaTypeDefinition } from 'sanity'
+import plateSchema from './plate-schema'
 
-export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [],
+export const schemas: { types: SchemaTypeDefinition[] } = {
+  types: [plateSchema],
 }
