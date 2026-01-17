@@ -3,27 +3,116 @@
 @tailwind components;
 @tailwind utilities;
 
+@theme {
+  --font-sans: var(--font-montserrat), sans-serif;
+  --font-serif: var(--font-playfair), serif;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-color-white: #ffffff;
+  --font-color-black: #000000;
 }
 
 body {
   background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--font-color-black);
+  font-family: var(--font-montserrat), sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-montserrat), sans-serif;
+  font-weight: 700;
+}
+
+@layer components {
+
+  /* --- Layout Containers --- */
+  .container {
+    @apply flex flex-col gap-4 flex-wrap justify-center;
+  }
+
+  .container--mobile {
+    @apply min-w-[32rem];
+  }
+
+  .container--small {
+    @apply max-w-[10rem] mx-4 mt-20 mb-4;
+  }
+
+  /* Permite estilizar SVGs hijos sin selectores complejos anidados */
+  .container--small svg {
+    @apply fill-white;
+  }
+
+  .container--inline {
+    @apply flex-row;
+  }
+
+  /* --- Glass Container Core --- */
+  .glass-container {
+    @apply relative flex items-center bg-transparent overflow-hidden flex-auto transition-all duration-300;
+
+    /* Radio base de 2rem */
+    @apply rounded-[2rem];
+
+    /* Sombra personalizada */
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.1);
+
+    /* Curva de animación personalizada */
+    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 2.2);
+  }
+
+  /* Modificadores */
+  .glass-container--rounded {
+    @apply rounded-[3rem];
+  }
+
+  .glass-container--large,
+  .glass-container--medium {
+    @apply flex-auto;
+    /* flex: 1 1 auto */
+  }
+
+  .glass-container--small {
+    @apply flex-initial;
+    /* flex: 0 1 auto */
+  }
+
+  /* --- Layers (Capas internas) --- */
+  .glass-filter,
+  .glass-overlay,
+  .glass-specular {
+    @apply absolute inset-0 rounded-[inherit];
+  }
+
+  .glass-filter {
+    @apply z-0 backdrop-blur-[4px] brightness-110 contrast-125 saturate-100;
+    /* Nota: url(#lensFilter) requiere un SVG en el HTML, ver abajo */
+    filter: url(#lensFilter) saturate(120%) brightness(1.15);
+  }
+
+  .glass-overlay {
+    @apply z-10;
+    background-color: rgba(255, 255, 255, 0.25);
+    /* var(--lg-bg-color) */
+  }
+
+  .glass-specular {
+    @apply z-20;
+    /* Sombra interior para el brillo */
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.75),
+      inset 0 0 5px rgba(255, 255, 255, 0.75);
+  }
+
+  .glass-content {
+    @apply relative z-30 flex flex-auto items-center justify-around flex-wrap gap-4;
+    padding: 30px 28px;
+  }
 }
