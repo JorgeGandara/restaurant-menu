@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Montserrat, Playfair_Display } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -10,6 +11,11 @@ const montserrat = Montserrat({
 const playfair = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
+});
+
+const faith = localFont({
+  src: "./fonts/faith.ttf",
+  variable: "--font-faith",
 });
 
 export const metadata: Metadata = {
@@ -28,6 +34,7 @@ export default function RootLayout({
         className={`
           ${montserrat.variable}
           ${playfair.variable}
+          ${faith.variable}
           antialiased
           min-h-screen
         `}

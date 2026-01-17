@@ -6,6 +6,7 @@
 @theme {
   --font-sans: var(--font-montserrat), sans-serif;
   --font-serif: var(--font-playfair), serif;
+  --font-faith: var(--font-faith), serif;
 }
 
 :root {
@@ -21,7 +22,10 @@ body {
   font-family: var(--font-montserrat), sans-serif;
 }
 
-h1,
+h1 {
+  font-family: var(--font-faith), serif;
+}
+
 h2,
 h3,
 h4,

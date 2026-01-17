@@ -35,7 +35,7 @@ export default async function Home() {
             </div>
 
             {/* Bienvenida */}
-            <h1 className="text-4xl text-gray-900 mb-2 font-bold">
+            <h1 className="text-6xl text-gray-900 mb-2 font-bold">
               {settings?.name || "Marviche"}
             </h1>
             <p className="text-gray-800 text-lg font-medium mb-8 max-w-xs">
