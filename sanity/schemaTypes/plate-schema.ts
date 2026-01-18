@@ -4,9 +4,17 @@ const plateSchema = {
     type: "document",
     fields: [
         {
+            name: "restaurant",
+            title: "Restaurante",
+            type: "reference",
+            to: [{ type: "restaurant" }],
+            validation: (Rule: any) => Rule.required(),
+        },
+        {
             name: "name",
             title: "Name",
             type: "string",
+            validation: (Rule: any) => Rule.required(),
         },
         {
             name: "description",
@@ -24,7 +32,7 @@ const plateSchema = {
                     { title: "Postres", value: "postres" },
                     { title: "Bebidas", value: "bebidas" },
                 ],
-                layout: 'dropdown'
+                layout: "dropdown",
             },
         },
         {
@@ -36,8 +44,9 @@ const plateSchema = {
             name: "price",
             title: "Price",
             type: "number",
+            validation: (Rule: any) => Rule.min(0),
         },
     ],
-}
+};
 
-export default plateSchema
+export default plateSchema;

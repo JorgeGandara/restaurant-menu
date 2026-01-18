@@ -1,7 +1,8 @@
 import { type SchemaTypeDefinition } from 'sanity'
 import plateSchema from './plate-schema'
 import { restaurantSettings } from './restaurant-settings'
+import { restaurantSchema } from './restaurant'
 
 export const schemas: { types: SchemaTypeDefinition[] } = {
-  types: [plateSchema, restaurantSettings],
+  types: [restaurantSchema,plateSchema, restaurantSettings],
 }

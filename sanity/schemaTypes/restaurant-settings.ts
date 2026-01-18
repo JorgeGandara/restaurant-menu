@@ -6,6 +6,13 @@ export const restaurantSettings = defineType({
     type: 'document',
     fields: [
         defineField({
+            name: 'restaurant',
+            title: 'Restaurante',
+            type: 'reference',
+            to: [{ type: 'restaurant' }],
+            validation: Rule => Rule.required(),
+        }),
+        defineField({
             name: 'name',
             title: 'Nombre del Restaurante',
             type: 'string',
