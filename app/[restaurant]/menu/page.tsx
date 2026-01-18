@@ -59,32 +59,42 @@ export default async function Menu({ params }: MenuProps) {
                 <div className="glass-specular" />
 
                 <div className="glass-content w-full flex-col items-stretch !p-8">
+
+                    {/* Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
 
                         {plates.map((plate: Plate) => (
                             <div
                                 key={plate._id}
-                                className="flex flex-col group hover:bg-white/5 transition-colors"
+                                className="flex flex-col rounded-xl p-3"
                             >
-                                <div className="relative h-48 w-full mb-4 rounded-xl overflow-hidden bg-black/5">
+
+                                {/* Image */}
+                                <div className="relative h-48 w-full mb-4 rounded-xl overflow-hidden bg-black/5 isolate">
                                     <Image
-                                        src={
-                                            plate.image
-                                                ? urlFor(plate.image).url()
-                                                : "/images/default-ui-image.webp"
-                                        }
+                                        src={plate.image ? urlFor(plate.image).url() : "/images/default-ui-image.webp"}
                                         alt={plate.name}
                                         fill
-                                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                        className="
+        object-cover
+        transition-transform
+        duration-300
+        ease-out
+        hover:scale-105
+        will-change-transform
+        translate-z-0
+      "
                                     />
                                 </div>
 
-                                <div className="flex flex-col flex-grow">
-                                    <div className="flex justify-between items-start mb-2">
-                                        <h2 className="text-xl font-serif font-bold">
+                                {/* Text */}
+                                <div className="flex flex-col">
+                                    <div className="flex justify-between items-start mb-2 gap-2">
+                                        <h2 className="text-xl text-gray-900 font-serif font-bold leading-tight">
                                             {plate.name}
                                         </h2>
-                                        <span className="text-lg text-orange-600 font-bold">
+                                        <span className="text-lg text-orange-600 font-bold whitespace-nowrap">
                                             ${plate.price}
                                         </span>
                                     </div>
