@@ -19,8 +19,8 @@ const faith = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Marviche",
-  description: "by multiware",
+  title: "Multiware Menu",
+  description: "Plataforma de menús digitales para restaurantes",
 };
 
 export default function RootLayout({
@@ -29,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="es">
       <body
         className={`
           ${montserrat.variable}
@@ -38,23 +38,19 @@ export default function RootLayout({
           antialiased
           min-h-screen
         `}
-        style={{
-          backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('/images/fondo.png')",
-          backgroundAttachment: "fixed",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
       >
-        <div className="min-h-screen">
-          {children}
-        </div>
+        {children}
 
-        {/* Global SVG Filter for Glassmorphism */}
+        {/* SVG global reutilizable */}
         <svg className="absolute w-0 h-0 pointer-events-none">
           <defs>
             <filter id="lensFilter">
-              <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="3" result="noise" />
+              <feTurbulence
+                type="fractalNoise"
+                baseFrequency="0.01"
+                numOctaves="3"
+                result="noise"
+              />
               <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
             </filter>
           </defs>

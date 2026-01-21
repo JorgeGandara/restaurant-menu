@@ -1,45 +1,33 @@
 import { createClient, groq } from "next-sanity";
+import { PLATES_BY_RESTAURANT, RESTAURANT_BY_SLUG } from "./queries";
 
-export async function getPlates() {
-    const client = createClient({
+const client = createClient({
+    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
 
-        projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
 
-        dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
+    apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION,
 
-        apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION,
+    useCdn: process.env.NODE_ENV === 'production',
 
-        useCdn: process.env.NODE_ENV === 'production',
-    })
+})
 
-    return client.fetch(groq`*[_type == "plate"]{
-        _id,
-        name,
-        description,
-        category,
-        image,
-        price
-        }`
+export async function getPlates(restaurantSlug: string) {
+    return client.fetch(
+        PLATES_BY_RESTAURANT,
+        { slug: restaurantSlug },
+        {
+            next: { revalidate: 30 },
+        }
     )
 }
 
-export async function getRestaurantSettings() {
-    const client = createClient({
-        projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-        dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
-        apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION,
-        useCdn: process.env.NODE_ENV === 'production',
-    })
-
-    return client.fetch(groq`*[_type == "restaurantSettings"][0]{
-        name,
-        description,
-        address,
-        phone,
-        email,
-        instagram,
-        facebook,
-        whatsapp
-    }`
+export async function getRestaurantSettings(restaurantSlug: string) {
+    return client.fetch(
+        RESTAURANT_BY_SLUG,
+        { slug: restaurantSlug }, 
+        {
+            next: { revalidate: 30 },
+        }
     )
 }
