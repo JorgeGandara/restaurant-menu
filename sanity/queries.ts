@@ -21,3 +21,25 @@ export const PLATES_BY_RESTAURANT = groq`
     category
   }
 `;
+
+export const ADMIN_PLATES_BY_RESTAURANT = groq`
+  *[
+    _type == "plate" &&
+    restaurant->slug.current == $slug
+  ]{
+    _id,
+    name,
+    price,
+    category
+  }
+`;
+
+export const PLATE_BY_ID = groq`
+  *[_type == "plate" && _id == $id][0]{
+    _id,
+    name,
+    description,
+    price,
+    category
+  }
+`;
