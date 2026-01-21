@@ -77,14 +77,14 @@ export default async function Menu({ params }: MenuProps) {
                                         fill
                                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                         className="
-        object-cover
-        transition-transform
-        duration-300
-        ease-out
-        hover:scale-105
-        will-change-transform
-        translate-z-0
-      "
+                                            object-cover
+                                            transition-transform
+                                            duration-300
+                                            ease-out
+                                            hover:scale-105
+                                            will-change-transform
+                                            translate-z-0
+                                        "
                                     />
                                 </div>
 
