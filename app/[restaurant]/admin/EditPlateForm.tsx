@@ -1,27 +1,28 @@
 'use client'
 
-import { useActionState } from 'react';
+import { useActionState, useEffect } from 'react';
 import { editPlate } from './actions';
 import { Plate } from '@/types/Plate';
 import Image from 'next/image';
 import { urlFor } from '@/sanity/lib/image';
 
-const initialState = {
-  message: '',
-};
+const initialState = { message: '' };
 
 type Props = {
-    restaurantId: string;
-    restaurantSlug: string;
-    plate: Plate;
+  restaurantSlug: string;
+  plate: Plate;
+  onSuccess?: () => void;
 }
 
-export default function EditPlateForm({ restaurantId, restaurantSlug, plate }: Props) {
+export default function EditPlateForm({ restaurantSlug, plate, onSuccess }: Props) {
   const [state, formAction, isPending] = useActionState(editPlate, initialState);
+
+  useEffect(() => {
+    if (state?.success) onSuccess?.();
+  }, [state?.success, onSuccess]);
 
   return (
     <form action={formAction} className="space-y-4 p-6 pt-0">
-      <input type="hidden" name="restaurantId" value={restaurantId} />
       <input type="hidden" name="restaurantSlug" value={restaurantSlug} />
       <input type="hidden" name="plateId" value={plate._id} />
 
@@ -78,20 +79,19 @@ export default function EditPlateForm({ restaurantId, restaurantSlug, plate }: P
         </select>
       </div>
 
-      <div>
-        <label htmlFor="image" className="block text-sm font-medium text-gray-700">Imagen (Deja vacío para mantener actual)</label>
-        
-        {plate.image && (
-            <div className="mb-2 relative h-20 w-20">
-                 <Image 
-                    src={urlFor(plate.image).url()} 
-                    alt="Current" 
-                    fill 
-                    className="object-cover rounded-md"
-                 />
-            </div>
-        )}
+      {plate.image && (
+        <div className="mb-2 relative h-20 w-20">
+          <Image
+            src={urlFor(plate.image).url()}
+            alt="Current"
+            fill
+            className="object-cover rounded-md"
+          />
+        </div>
+      )}
 
+      <div>
+        <label htmlFor="image" className="block text-sm font-medium text-gray-700">Imagen (deja vacío para mantener actual)</label>
         <input
           type="file"
           id="image"
@@ -110,10 +110,11 @@ export default function EditPlateForm({ restaurantId, restaurantSlug, plate }: P
           {isPending ? 'Guardando...' : 'Guardar Cambios'}
         </button>
       </div>
-      
-      {state?.message && (
+
+      {state?.message && !state.success && (
         <p className="text-red-500 text-sm">{state.message}</p>
       )}
     </form>
   );
 }
+

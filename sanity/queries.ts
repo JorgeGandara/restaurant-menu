@@ -4,6 +4,13 @@ export const RESTAURANT_BY_SLUG = groq`
   *[_type == "restaurant" && slug.current == $slug][0]{
     _id,
     name,
+    description,
+    address,
+    phone,
+    email,
+    instagram,
+    facebook,
+    whatsapp,
     slug
   }
 `;
@@ -42,4 +49,8 @@ export const PLATE_BY_ID = groq`
     price,
     category
   }
+`;
+
+export const GET_ADMIN_KEY = groq`
+  *[_type == "restaurantSettings" && restaurant->slug.current == $slug][0].adminKey
 `;

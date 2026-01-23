@@ -1,19 +1,26 @@
 'use client'
 
-import { useActionState } from 'react';
+import { useActionState, useEffect } from 'react';
 import { createPlate } from './actions';
+import { Plate } from '@/types/Plate';
 
-const initialState = {
-  message: '',
-};
+
 
 type Props = {
-    restaurantId: string;
-    restaurantSlug: string;
+  restaurantId: string;
+  restaurantSlug: string;
+  onSuccess?: (newPlate: Plate) => void; // 🔹 ahora recibe el plato
 }
 
-export default function CreatePlateForm({ restaurantId, restaurantSlug }: Props) {
+export default function CreatePlateForm({ restaurantId, restaurantSlug, onSuccess }: Props) {
+  const initialState = { message: '' };
   const [state, formAction] = useActionState(createPlate, initialState);
+
+  useEffect(() => {
+    if (state?.success && state.plate) { // 🔹 si se creó, llamamos al callback
+      onSuccess?.(state.plate);
+    }
+  }, [state?.success, state?.plate, onSuccess]);
 
   return (
     <form action={formAction} className="space-y-4 p-6 pt-0">
@@ -88,10 +95,11 @@ export default function CreatePlateForm({ restaurantId, restaurantSlug }: Props)
           Crear Plato
         </button>
       </div>
-      
-      {state?.message && (
+
+      {state?.message && !state.success && (
         <p className="text-red-500 text-sm">{state.message}</p>
       )}
     </form>
   );
 }
+

@@ -5,6 +5,7 @@ export type Plate ={
     category: string;
     image: string;
     price: number;
+    restaurantId: string; // ✅ agregado para MultiRestaurante
 };
     
         

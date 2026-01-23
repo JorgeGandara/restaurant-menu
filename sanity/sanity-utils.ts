@@ -1,5 +1,5 @@
 import { createClient, groq } from "next-sanity";
-import { PLATES_BY_RESTAURANT, RESTAURANT_BY_SLUG, PLATE_BY_ID, ADMIN_PLATES_BY_RESTAURANT } from "./queries";
+import { PLATES_BY_RESTAURANT, RESTAURANT_BY_SLUG, PLATE_BY_ID, ADMIN_PLATES_BY_RESTAURANT, GET_ADMIN_KEY } from "./queries";
 
 const client = createClient({
     projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
@@ -35,7 +35,7 @@ export async function getAdminPlates(restaurantSlug: string) {
 export async function getRestaurantSettings(restaurantSlug: string) {
     return client.fetch(
         RESTAURANT_BY_SLUG,
-        { slug: restaurantSlug }, 
+        { slug: restaurantSlug },
         {
             next: { revalidate: 30 },
         }
@@ -48,6 +48,17 @@ export async function getPlate(id: string) {
         { id },
         {
             next: { revalidate: 0 },
+        }
+    )
+}
+
+export async function getAdminKey(restaurantSlug: string) {
+    return client.fetch(
+        GET_ADMIN_KEY,
+        { slug: restaurantSlug },
+        {
+            next: { revalidate: 0 },
+            token: process.env.NEXT_PUBLIC_SANITY_TOKEN
         }
     )
 }

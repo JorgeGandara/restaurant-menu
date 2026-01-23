@@ -1,14 +1,27 @@
 import Link from "next/link";
 import { getRestaurantSettings } from "@/sanity/sanity-utils";
+import { notFound } from "next/navigation";
 
-interface ContactProps {
-    params: {
-        restaurant: string;
-    };
+interface LocationProps {
+
+    params: Promise<{
+        restaurant?: string;
+    }>
 }
 
-export default async function Contact({ params }: ContactProps) {
-    const settings = await getRestaurantSettings(params.restaurant);
+export default async function Location({ params }: LocationProps) {
+
+    const { restaurant } = await params;
+
+    if (!restaurant) {
+        notFound();
+    }
+
+    const settings = await getRestaurantSettings(restaurant);
+
+    if (!settings) {
+        notFound();
+    }
 
     return (
         <main className="w-full min-h-screen flex items-center justify-center p-4">
@@ -23,7 +36,7 @@ export default async function Contact({ params }: ContactProps) {
 
                         {/* Header */}
                         <div className="flex items-center gap-4 mb-6 w-full">
-                            <Link href={`/${params.restaurant}`}>
+                            <Link href={`/${restaurant}`}>
                                 <button className="glass-button-outline w-10 h-10 rounded-full flex items-center justify-center hover:bg-black/10 transition">
                                     ←
                                 </button>

@@ -53,5 +53,17 @@ export const restaurantSettings = defineType({
             title: 'WhatsApp (Número o Link)',
             type: 'string',
         }),
+        defineField({
+            name: 'adminKey',
+            title: 'Clave de Administrador',
+            description: 'Clave para acceder al panel de administración',
+            type: 'string',
+            hidden: false,
+        }),
+        defineField({
+            name: 'logo',
+            title: 'Logo',
+            type: 'image',
+        }),
     ],
 });
