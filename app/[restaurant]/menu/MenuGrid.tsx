@@ -10,9 +10,10 @@ type MenuGridProps = {
     restaurant: string;
     isAdmin: boolean;
     onPlateDeleted?: (plateId: string) => void; // ✅ prop
+    onPlateUpdated?: (plate: Plate) => void;
 };
 
-export default function MenuGrid({ plates, restaurant, isAdmin, onPlateDeleted }: MenuGridProps) {
+export default function MenuGrid({ plates, restaurant, isAdmin, onPlateDeleted, onPlateUpdated }: MenuGridProps) {
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
             {plates.map((plate: Plate) => (
@@ -26,6 +27,7 @@ export default function MenuGrid({ plates, restaurant, isAdmin, onPlateDeleted }
                             restaurantSlug={restaurant}
                             isAdmin={isAdmin}
                             onPlateDeleted={onPlateDeleted} // ✅ prop
+                            onPlateUpdated={onPlateUpdated}
                         />
                     )}
 

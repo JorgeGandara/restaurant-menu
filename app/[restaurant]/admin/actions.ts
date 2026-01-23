@@ -39,6 +39,7 @@ async function uploadImage(imageFile: File): Promise<string | null> {
 export async function createPlate(_state: ActionState, formData: FormData): Promise<ActionState> {
   const restaurantId = formData.get("restaurantId") as string;
   const restaurantSlug = formData.get("restaurantSlug") as string;
+  const mode = formData.get("mode") as "menu" | "admin";
 
 
 
@@ -95,14 +96,22 @@ export async function createPlate(_state: ActionState, formData: FormData): Prom
     };
 
     revalidatePath(`/${restaurantSlug}/menu`);
+    revalidatePath(`/${restaurantSlug}/admin`);
 
+    // 🟡 ADMIN → redirigir
+    if (mode === "admin") {
+      return {
+        success: true,
+        redirectTo: `/${restaurantSlug}/admin`,
+      };
+    }
 
-
+    // 🟢 MENU → UI optimista
     return {
       success: true,
-      plate, // 🔹 devolver el plato creado
-      redirectTo: `/${restaurantSlug}/menu`,
+      plate,
     };
+
   } catch (error) {
     console.error("Error creating plate:", error);
     return { message: "Failed to create plate" };
@@ -114,10 +123,12 @@ export async function editPlate(_state: ActionState, formData: FormData): Promis
 
   const plateId = formData.get("plateId") as string;
   const restaurantSlug = formData.get("restaurantSlug") as string;
+  const mode = formData.get("mode") as "menu" | "admin";
 
   if (!plateId || !restaurantSlug) {
     return { message: "Plate ID or Slug is missing" };
   }
+
 
   await checkAdminCookie(restaurantSlug);
 
@@ -151,19 +162,42 @@ export async function editPlate(_state: ActionState, formData: FormData): Promis
       };
     }
 
-    await sanityClient.patch(plateId).set(updates).commit();
+    const updatedDoc = await sanityClient
+      .patch(plateId)
+      .set(updates)
+      .commit();
+
+    const updatedPlate: Plate = {
+      _id: updatedDoc._id,
+      name: updatedDoc.name,
+      description: updatedDoc.description,
+      price: updatedDoc.price,
+      category: updatedDoc.category,
+      image: updatedDoc.image?.asset?._ref || "",
+      restaurantId: updatedDoc.restaurant?._ref || "",
+    };
+
+    revalidatePath(`/${restaurantSlug}/menu`);
+    revalidatePath(`/${restaurantSlug}/admin`);
+
+    // 🟢 ADMIN → redirigir
+    if (mode === "admin") {
+      return {
+        success: true,
+        redirectTo: `/${restaurantSlug}/admin`,
+      };
+    }
+
+    // 🟢 MENU → UI optimista
+    return {
+      success: true,
+      plate: updatedPlate,
+    };
 
   } catch (error) {
     console.error("Error editing plate:", error);
-    return { message: "Failed to edit plate" };
+    return { message: "Failed to update plate" };
   }
-
-  revalidatePath(`/${restaurantSlug}/admin`);
-  revalidatePath(`/${restaurantSlug}/menu`);
-  return {
-    success: true,
-    redirectTo: `/${restaurantSlug}/menu`
-  };
 }
 
 export async function deletePlate(_state: ActionState, formData: FormData): Promise<ActionState> {
@@ -171,6 +205,7 @@ export async function deletePlate(_state: ActionState, formData: FormData): Prom
 
   const plateId = formData.get("plateId") as string;
   const restaurantSlug = formData.get("restaurantSlug") as string;
+  const mode = formData.get("mode") as "menu" | "admin";
 
   if (!plateId || !restaurantSlug) {
     return { message: "Missing required fields" };

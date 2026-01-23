@@ -25,6 +25,12 @@ export default function MenuClient({ initialPlates, restaurant, restaurantId, is
         setPlates(prev => [newPlate, ...prev]);
     };
 
+    const handlePlateUpdated = (updated: Plate) => {
+        setPlates(prev =>
+            prev.map(p => (p._id === updated._id ? updated : p))
+        );
+    };
+
     return (
         <main className="w-full min-h-screen p-6 pb-20">
 
@@ -58,6 +64,7 @@ export default function MenuClient({ initialPlates, restaurant, restaurantId, is
                         restaurant={restaurant}
                         isAdmin={isAdmin}
                         onPlateDeleted={handlePlateDeleted}
+                        onPlateUpdated={handlePlateUpdated}
                     />
                 </div>
             </div>

@@ -41,6 +41,7 @@ export default async function EditPlatePage({ params }: Props) {
         <EditPlateForm
           restaurantSlug={restaurant}
           plate={plate}
+          mode="admin"
         />
       </div>
     </div>

@@ -38,6 +38,7 @@ export default function MenuAdminActions({ restaurant, restaurantId, isAdmin, on
                                 setOpenCreate(false);
                                 onPlateCreated?.(newPlate); // ✅ agregar dinámicamente
                             }}
+                            mode="menu"
                         />
 
                         <button

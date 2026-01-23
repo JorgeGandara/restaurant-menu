@@ -12,19 +12,32 @@ type Props = {
   restaurantSlug: string;
   plate: Plate;
   onSuccess?: () => void;
+  onPlateUpdated?: (plate: Plate) => void;
+  mode?: "menu" | "admin";
 }
 
-export default function EditPlateForm({ restaurantSlug, plate, onSuccess }: Props) {
+export default function EditPlateForm({ restaurantSlug, plate, onSuccess, onPlateUpdated, mode = "menu" }: Props) {
   const [state, formAction, isPending] = useActionState(editPlate, initialState);
 
   useEffect(() => {
-    if (state?.success) onSuccess?.();
-  }, [state?.success, onSuccess]);
+    if (!state?.success) return;
+
+    if (state.redirectTo) {
+      window.location.href = state.redirectTo;
+      return;
+    }
+
+    if (state?.success && state?.plate) {
+      onPlateUpdated?.(state.plate);
+      onSuccess?.();
+    }
+  }, [state, onSuccess, onPlateUpdated]);
 
   return (
     <form action={formAction} className="space-y-4 p-6 pt-0">
       <input type="hidden" name="restaurantSlug" value={restaurantSlug} />
       <input type="hidden" name="plateId" value={plate._id} />
+      <input type="hidden" name="mode" value={mode} />
 
       <div>
         <label htmlFor="name" className="block text-sm font-medium text-gray-700">Nombre del Plato</label>

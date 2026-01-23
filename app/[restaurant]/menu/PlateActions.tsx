@@ -10,9 +10,10 @@ type PlateActionsProps = {
     restaurantSlug: string;
     isAdmin: boolean;
     onPlateDeleted?: (plateId: string) => void; // ✅ prop
+    onPlateUpdated?: (plate: Plate) => void;
 };
 
-export default function PlateActions({ plate, restaurantSlug, isAdmin, onPlateDeleted }: PlateActionsProps) {
+export default function PlateActions({ plate, restaurantSlug, isAdmin, onPlateDeleted, onPlateUpdated }: PlateActionsProps) {
     const [showEdit, setShowEdit] = useState(false);
 
     if (!isAdmin) return null;
@@ -31,7 +32,7 @@ export default function PlateActions({ plate, restaurantSlug, isAdmin, onPlateDe
                 <DeletePlateButton
                     plateId={plate._id}
                     restaurantSlug={restaurantSlug}
-                    onSuccess={() => onPlateDeleted?.(plate._id)} 
+                    onSuccess={() => onPlateDeleted?.(plate._id)}
                 />
             </div>
 
@@ -44,6 +45,8 @@ export default function PlateActions({ plate, restaurantSlug, isAdmin, onPlateDe
                             plate={plate}
                             restaurantSlug={restaurantSlug}
                             onSuccess={() => setShowEdit(false)}
+                            onPlateUpdated={onPlateUpdated}
+                            mode="menu"
                         />
 
                         <button

@@ -10,22 +10,33 @@ type Props = {
   restaurantId: string;
   restaurantSlug: string;
   onSuccess?: (newPlate: Plate) => void; // 🔹 ahora recibe el plato
+  mode?: "menu" | "admin";
 }
 
-export default function CreatePlateForm({ restaurantId, restaurantSlug, onSuccess }: Props) {
+export default function CreatePlateForm({ restaurantId, restaurantSlug, onSuccess, mode = "menu" }: Props) {
   const initialState = { message: '' };
   const [state, formAction] = useActionState(createPlate, initialState);
 
   useEffect(() => {
-    if (state?.success && state.plate) { // 🔹 si se creó, llamamos al callback
+    if (!state?.success) return;
+
+    // 🟢 ADMIN → redirección
+    if (state.redirectTo) {
+      window.location.href = state.redirectTo;
+      return;
+    }
+
+    // 🟢 MENU → UI optimista
+    if (state.plate) {
       onSuccess?.(state.plate);
     }
-  }, [state?.success, state?.plate, onSuccess]);
+  }, [state, onSuccess]);
 
   return (
     <form action={formAction} className="space-y-4 p-6 pt-0">
       <input type="hidden" name="restaurantId" value={restaurantId} />
       <input type="hidden" name="restaurantSlug" value={restaurantSlug} />
+      <input type="hidden" name="mode" value={mode} />
 
       <div>
         <label htmlFor="name" className="block text-sm font-medium text-gray-700">Nombre del Plato</label>
