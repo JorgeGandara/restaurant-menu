@@ -65,5 +65,104 @@ export const restaurantSettings = defineType({
             title: 'Logo',
             type: 'image',
         }),
+        defineField({
+            name: 'imagen_del_restaurante',
+            title: 'Imagen del Restaurante',
+            type: 'image',
+        }),
+        defineField({
+            name: 'googleMapsUrl',
+            title: 'URL de Google Maps',
+            type: 'url',
+        }),
+        defineField({
+            name: 'videoHowToArrive',
+            title: 'Video de Cómo Llegar',
+            type: 'object',
+            fields: [
+                defineField({
+                    name: 'source',
+                    title: 'Fuente del video',
+                    type: 'string',
+                    options: {
+                        list: [
+                            { title: 'Subir archivo', value: 'file' },
+                            { title: 'URL externa (YouTube / Vimeo)', value: 'url' },
+                        ],
+                        layout: 'radio',
+                    },
+                    initialValue: 'file',
+                }),
+
+                defineField({
+                    name: 'videoFile',
+                    title: 'Archivo de video',
+                    type: 'file',
+                    options: {
+                        accept: 'video/*',
+                    },
+                    hidden: ({ parent }) => parent?.source !== 'file',
+                }),
+
+                defineField({
+                    name: 'videoUrl',
+                    title: 'URL del video',
+                    type: 'url',
+                    hidden: ({ parent }) => parent?.source !== 'url',
+                }),
+            ],
+        }),
+        defineField({
+            name: 'typography',
+            title: 'Tipografía del Documento',
+            type: 'object',
+            options: {
+                collapsible: true,
+                collapsed: false,
+            },
+            fields: [
+                defineField({
+                    name: 'fontFamily',
+                    title: 'Familia tipográfica',
+                    type: 'string',
+                    options: {
+                        list: [
+                            { title: 'Inter', value: 'Inter, sans-serif' },
+                            { title: 'Roboto', value: 'Roboto, sans-serif' },
+                            { title: 'Poppins', value: 'Poppins, sans-serif' },
+                            { title: 'Montserrat', value: 'Montserrat, sans-serif' },
+                        ],
+                    },
+                }),
+                defineField({
+                    name: 'fontSize',
+                    title: 'Tamaño base',
+                    type: 'string',
+                    options: {
+                        list: [
+                            { title: 'Pequeño (14px)', value: '14px' },
+                            { title: 'Normal (16px)', value: '16px' },
+                            { title: 'Grande (18px)', value: '18px' },
+                        ],
+                    },
+                    initialValue: '16px',
+                }),
+
+                defineField({
+                    name: 'fontWeight',
+                    title: 'Peso',
+                    type: 'number',
+                    options: {
+                        list: [
+                            { title: 'Light', value: 300 },
+                            { title: 'Regular', value: 400 },
+                            { title: 'Medium', value: 500 },
+                            { title: 'Bold', value: 700 },
+                        ],
+                    },
+                    initialValue: 400,
+                }),
+            ],
+        }),
     ],
 });

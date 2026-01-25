@@ -4,6 +4,7 @@ import { getRestaurantSettings } from "@/sanity/sanity-utils";
 import { notFound } from "next/navigation";
 import AdminButton from "./components/AdminButton";
 import AdminActivator from "./components/AdminActivator";
+import { urlFor } from "@/sanity/lib/image";
 
 interface HomeProps {
   params: Promise<{
@@ -43,13 +44,19 @@ export default async function Home({ params }: HomeProps) {
             <AdminActivator restaurant={restaurant}>
               <div className="mb-6 relative cursor-default">
                 <div className="absolute inset-0 bg-white/20 blur-xl rounded-full scale-110"></div>
-                <Image
-                  src={settings.logo || "/images/logo.png"}
-                  alt={settings.name}
-                  width={160}
-                  height={160}
-                  className="rounded-full shadow-2xl relative z-10 border-4 border-white/30 mx-auto"
-                />
+                {settings.logo ? (
+                  <Image
+                    src={urlFor(settings.logo).url()}
+                    alt={settings.name}
+                    width={160}
+                    height={160}
+                    className="rounded-full shadow-2xl relative z-10 border-4 border-white/30 mx-auto"
+                  />
+                ) : (
+                  <div className="w-40 h-40 rounded-full bg-gray-200 flex items-center justify-center relative z-10 border-4 border-white/30 mx-auto text-gray-400">
+                    Sin Logo
+                  </div>
+                )}
               </div>
             </AdminActivator>
 

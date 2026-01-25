@@ -1,7 +1,7 @@
 import { groq } from "next-sanity";
 
 export const RESTAURANT_BY_SLUG = groq`
-  *[_type == "restaurant" && slug.current == $slug][0]{
+  *[_type == "restaurantSettings" && restaurant->slug.current == $slug][0]{
     _id,
     name,
     description,
@@ -11,7 +11,12 @@ export const RESTAURANT_BY_SLUG = groq`
     instagram,
     facebook,
     whatsapp,
-    slug
+    logo,
+    imagen_del_restaurante,
+    googleMapsUrl,
+    videoHowToArrive,
+    typography,
+    "slug": restaurant->slug.current
   }
 `;
 

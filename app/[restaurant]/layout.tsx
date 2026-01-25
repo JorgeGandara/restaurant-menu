@@ -36,6 +36,9 @@ export default async function RestaurantLayout({
                 backgroundAttachment: "fixed",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
+                fontFamily: settings.typography?.fontFamily || 'inherit',
+                fontSize: settings.typography?.fontSize ? `${settings.typography.fontSize}px` : 'inherit',
+                fontWeight: settings.typography?.fontWeight || 'inherit',
             }}
         >
             {children}
