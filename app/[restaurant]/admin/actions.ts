@@ -22,19 +22,19 @@ async function checkAdminCookie(restaurantSlug: string) {
   }
 }
 
-async function uploadImage(imageFile: File): Promise<string | null> {
-  if (imageFile && imageFile.size > 0) {
-    const arrayBuffer = await imageFile.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
+// async function uploadImage(imageFile: File): Promise<string | null> {
+//   if (imageFile && imageFile.size > 0) {
+//     const arrayBuffer = await imageFile.arrayBuffer();
+//     const buffer = Buffer.from(arrayBuffer);
 
-    const asset = await sanityClient.assets.upload('image', buffer, {
-      filename: imageFile.name,
-      contentType: imageFile.type
-    });
-    return asset._id;
-  }
-  return null;
-}
+//     const asset = await sanityClient.assets.upload('image', buffer, {
+//       filename: imageFile.name,
+//       contentType: imageFile.type
+//     });
+//     return asset._id;
+//   }
+//   return null;
+// }
 
 export async function createPlate(_state: ActionState, formData: FormData): Promise<ActionState> {
   const restaurantId = formData.get("restaurantId") as string;
@@ -53,14 +53,13 @@ export async function createPlate(_state: ActionState, formData: FormData): Prom
   const description = formData.get("description") as string;
   const price = Number(formData.get("price"));
   const category = formData.get("category") as string;
-  const imageFile = formData.get("image") as File;
 
   if (!name || !category) {
     return { message: "Name and Category are required" };
   }
 
   try {
-    const imageAssetId = await uploadImage(imageFile);
+    const imageAssetId = formData.get("imageAssetId") as string;
 
     const doc = {
       _type: 'plate',
@@ -95,8 +94,9 @@ export async function createPlate(_state: ActionState, formData: FormData): Prom
       image: createdPlate.image?.asset?._ref || "" // acceso correcto al _ref
     };
 
-    revalidatePath(`/${restaurantSlug}/menu`);
     revalidatePath(`/${restaurantSlug}/admin`);
+    revalidatePath(`/${restaurantSlug}/menu`);
+    
 
     // 🟡 ADMIN → redirigir
     if (mode === "admin") {
@@ -136,14 +136,13 @@ export async function editPlate(_state: ActionState, formData: FormData): Promis
   const description = formData.get("description") as string;
   const price = Number(formData.get("price"));
   const category = formData.get("category") as string;
-  const imageFile = formData.get("image") as File;
 
   if (!name || !category) {
     return { message: "Name and Category are required" };
   }
 
   try {
-    const imageAssetId = await uploadImage(imageFile);
+    const imageAssetId = formData.get("imageAssetId") as string;
 
     const updates: any = {
       name,
@@ -177,8 +176,9 @@ export async function editPlate(_state: ActionState, formData: FormData): Promis
       restaurantId: updatedDoc.restaurant?._ref || "",
     };
 
-    revalidatePath(`/${restaurantSlug}/menu`);
     revalidatePath(`/${restaurantSlug}/admin`);
+    revalidatePath(`/${restaurantSlug}/menu`);
+
 
     // 🟢 ADMIN → redirigir
     if (mode === "admin") {
@@ -221,5 +221,7 @@ export async function deletePlate(_state: ActionState, formData: FormData): Prom
   }
 
   revalidatePath(`/${restaurantSlug}/admin`);
+  revalidatePath(`/${restaurantSlug}/menu`);
+
   return { message: "Plate deleted successfully" };
 }

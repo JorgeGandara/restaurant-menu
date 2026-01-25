@@ -1,10 +1,11 @@
 'use client'
 
-import { useActionState, useEffect } from 'react';
+import { useActionState, useEffect, useState } from 'react';
 import { editPlate } from './actions';
 import { Plate } from '@/types/Plate';
 import Image from 'next/image';
 import { urlFor } from '@/sanity/lib/image';
+import { uploadImageClient } from '@/sanity/lib/uploadImagenClient';
 
 const initialState = { message: '' };
 
@@ -18,6 +19,18 @@ type Props = {
 
 export default function EditPlateForm({ restaurantSlug, plate, onSuccess, onPlateUpdated, mode = "menu" }: Props) {
   const [state, formAction, isPending] = useActionState(editPlate, initialState);
+  const [imageAssetId, setImageAssetId] = useState<string | null>(null);
+  const [uploading, setUploading] = useState(false);
+
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploading(true);
+    const assetId = await uploadImageClient(file);
+    setImageAssetId(assetId);
+    setUploading(false);
+  };
 
   useEffect(() => {
     if (!state?.success) return;
@@ -38,9 +51,13 @@ export default function EditPlateForm({ restaurantSlug, plate, onSuccess, onPlat
       <input type="hidden" name="restaurantSlug" value={restaurantSlug} />
       <input type="hidden" name="plateId" value={plate._id} />
       <input type="hidden" name="mode" value={mode} />
+      <input type="hidden" name="imageAssetId" value={imageAssetId ?? ""} />
 
+      {/* Nombre */}
       <div>
-        <label htmlFor="name" className="block text-sm font-medium text-gray-700">Nombre del Plato</label>
+        <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+          Nombre del Plato
+        </label>
         <input
           type="text"
           id="name"
@@ -51,8 +68,11 @@ export default function EditPlateForm({ restaurantSlug, plate, onSuccess, onPlat
         />
       </div>
 
+      {/* Descripción */}
       <div>
-        <label htmlFor="description" className="block text-sm font-medium text-gray-700">Descripción</label>
+        <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+          Descripción
+        </label>
         <textarea
           id="description"
           name="description"
@@ -62,8 +82,11 @@ export default function EditPlateForm({ restaurantSlug, plate, onSuccess, onPlat
         />
       </div>
 
+      {/* Precio */}
       <div>
-        <label htmlFor="price" className="block text-sm font-medium text-gray-700">Precio</label>
+        <label htmlFor="price" className="block text-sm font-medium text-gray-700">
+          Precio
+        </label>
         <input
           type="number"
           id="price"
@@ -75,8 +98,11 @@ export default function EditPlateForm({ restaurantSlug, plate, onSuccess, onPlat
         />
       </div>
 
+      {/* Categoría */}
       <div>
-        <label htmlFor="category" className="block text-sm font-medium text-gray-700">Categoría</label>
+        <label htmlFor="category" className="block text-sm font-medium text-gray-700">
+          Categoría
+        </label>
         <select
           id="category"
           name="category"
@@ -92,6 +118,7 @@ export default function EditPlateForm({ restaurantSlug, plate, onSuccess, onPlat
         </select>
       </div>
 
+      {/* Imagen actual */}
       {plate.image && (
         <div className="mb-2 relative h-20 w-20">
           <Image
@@ -103,17 +130,21 @@ export default function EditPlateForm({ restaurantSlug, plate, onSuccess, onPlat
         </div>
       )}
 
+      {/* Imagen nueva */}
       <div>
-        <label htmlFor="image" className="block text-sm font-medium text-gray-700">Imagen (deja vacío para mantener actual)</label>
+        <label htmlFor="image" className="block text-sm font-medium text-gray-700">
+          Imagen (deja vacío para mantener actual)
+        </label>
         <input
           type="file"
           id="image"
-          name="image"
           accept="image/*"
+          onChange={handleImageChange}
           className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-50 file:text-orange-700 hover:file:bg-orange-100"
         />
       </div>
 
+      {/* Submit */}
       <div className="pt-4 flex gap-2">
         <button
           type="submit"
@@ -128,6 +159,7 @@ export default function EditPlateForm({ restaurantSlug, plate, onSuccess, onPlat
         <p className="text-red-500 text-sm">{state.message}</p>
       )}
     </form>
+
   );
 }
 

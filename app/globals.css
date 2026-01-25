@@ -97,7 +97,7 @@ h6 {
   .glass-filter {
     @apply z-0 backdrop-blur-[4px] brightness-110 contrast-125 saturate-100;
     /* Nota: url(#lensFilter) requiere un SVG en el HTML, ver abajo */
-    filter: url(#lensFilter) saturate(120%) brightness(1.15);
+    filter: url(#lensFilter) saturate(120%) brightness(1.55);
   }
 
   .glass-overlay {

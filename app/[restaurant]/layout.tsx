@@ -30,8 +30,8 @@ export default async function RestaurantLayout({
             className="min-h-screen"
             style={{
                 backgroundImage: `linear-gradient(
-          rgba(0,0,0,0.2),
-          rgba(0,0,0,0.2)
+          rgba(0,0,0,0.4),
+          rgba(0,0,0,0.4)
         ), url('${settings.backgroundImage || "/images/fondo.png"}')`,
                 backgroundAttachment: "fixed",
                 backgroundSize: "cover",

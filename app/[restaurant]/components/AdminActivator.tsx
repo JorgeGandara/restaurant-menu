@@ -18,7 +18,7 @@ export default function AdminActivator({
     const startPress = () => {
         timerRef.current = setTimeout(() => {
             router.push(`/${restaurant}/admin`);
-        }, 10000); // 10  segundos
+        }, 5000); // 5  segundos
     };
 
     const endPress = () => {
