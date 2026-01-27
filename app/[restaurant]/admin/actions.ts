@@ -96,7 +96,7 @@ export async function createPlate(_state: ActionState, formData: FormData): Prom
 
     revalidatePath(`/${restaurantSlug}/admin`);
     revalidatePath(`/${restaurantSlug}/menu`);
-    
+
 
     // 🟡 ADMIN → redirigir
     if (mode === "admin") {
@@ -225,3 +225,5 @@ export async function deletePlate(_state: ActionState, formData: FormData): Prom
 
   return { message: "Plate deleted successfully" };
 }
+
+
