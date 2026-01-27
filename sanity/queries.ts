@@ -16,7 +16,9 @@ export const RESTAURANT_BY_SLUG = groq`
     googleMapsUrl,
     videoHowToArrive,
     typography,
-    "slug": restaurant->slug.current
+    backgroundImage,
+    "slug": restaurant->slug.current,
+    "restaurantId": restaurant._ref
   }
 `;
 
@@ -58,25 +60,4 @@ export const PLATE_BY_ID = groq`
 
 export const GET_ADMIN_KEY = groq`
   *[_type == "restaurantSettings" && restaurant->slug.current == $slug][0].adminKey
-`;
-
-export const RESTAURANT_WITH_BACKGROUND = groq`
-  *[_type == "restaurantSettings" && restaurant->slug.current == $slug][0]{
-    _id,
-    name,
-    description,
-    address,
-    phone,
-    email,
-    instagram,
-    facebook,
-    whatsapp,
-    logo,
-    imagen_del_restaurante,
-    googleMapsUrl,
-    videoHowToArrive,
-    typography,
-    backgroundImage,
-    "slug": restaurant->slug.current
-  }
 `;

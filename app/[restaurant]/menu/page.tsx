@@ -19,7 +19,7 @@ export default async function Menu({ params }: MenuProps) {
 
     if (!restaurantData) notFound();
 
-    const restaurantId = restaurantData._id;
+    const restaurantId = restaurantData.restaurantId;
 
     const cookieStore = cookies();
     const adminSession = (await cookieStore).get("admin_session");

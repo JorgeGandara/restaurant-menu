@@ -68,7 +68,7 @@ export default async function AdminPage({ params }: Props) {
           </div>
           <div className="px-6 pb-6">
             <h2 className="text-xl font-bold text-gray-800 mb-4 border-b pb-2">Agregar Nuevo Plato</h2>
-            <CreatePlateForm restaurantId={restaurantData._id} restaurantSlug={restaurant} mode="admin" />
+            <CreatePlateForm restaurantId={restaurantData.restaurantId} restaurantSlug={restaurant} mode="admin" />
           </div>
         </div>
 
