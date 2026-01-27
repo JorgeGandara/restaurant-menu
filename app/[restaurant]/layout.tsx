@@ -1,4 +1,5 @@
 import { getRestaurantSettings } from "@/sanity/sanity-utils";
+import { urlFor } from "@/sanity/lib/image";
 import { notFound } from "next/navigation";
 
 interface LayoutProps {
@@ -29,10 +30,12 @@ export default async function RestaurantLayout({
         <div
             className="min-h-screen"
             style={{
-                backgroundImage: `linear-gradient(
-          rgba(0,0,0,0.4),
-          rgba(0,0,0,0.4)
-        ), url('${settings.backgroundImage || "/images/fondo.png"}')`,
+                backgroundImage: settings.backgroundImage
+                  ? `linear-gradient(
+                      rgba(0,0,0,0.4),
+                      rgba(0,0,0,0.4)
+                    ), url('${urlFor(settings.backgroundImage).url()}')`
+                  : undefined,
                 backgroundAttachment: "fixed",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
@@ -43,5 +46,6 @@ export default async function RestaurantLayout({
         >
             {children}
         </div>
+        
     );
 }

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Montserrat, Playfair_Display } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+import { client } from "../sanity/lib/client";
+import imageUrlBuilder from "@sanity/image-url";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -18,16 +20,30 @@ const faith = localFont({
   variable: "--font-faith",
 });
 
+const builder = imageUrlBuilder(client);
+
+function urlFor(source: any) {
+  return builder.image(source);
+}
+
 export const metadata: Metadata = {
   title: "Multiware Menu",
   description: "Plataforma de menús digitales para restaurantes",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const settings = await client.fetch(
+    `*[_type == "restaurantSettings" && restaurant->slug.current == "your_slug"][0]{backgroundImage}`
+  );
+
+  const backgroundImageUrl = settings?.backgroundImage
+    ? urlFor(settings.backgroundImage).url()
+    : null;
+
   return (
     <html lang="es">
       <body
@@ -38,6 +54,13 @@ export default function RootLayout({
           antialiased
           min-h-screen
         `}
+        style={{
+          backgroundImage: backgroundImageUrl
+            ? `url(${backgroundImageUrl})`
+            : undefined,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
       >
         {children}
 

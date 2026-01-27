@@ -45,8 +45,8 @@ export default async function Contact({ params }: ContactProps) {
                         </div>
 
                         <div className="flex flex-col gap-6 w-full text-gray-800">
-                            {info(settings.phone, "Teléfono", "tel:")}
-                            {info(settings.email, "Correo", "mailto:")}
+                            {info(settings.phone, "Teléfono")}
+                            {info(settings.email, "Correo")}
                         </div>
 
                         {/* Socials */}

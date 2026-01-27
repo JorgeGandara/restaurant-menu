@@ -50,8 +50,8 @@ export const restaurantSettings = defineType({
         }),
         defineField({
             name: 'whatsapp',
-            title: 'WhatsApp (Número o Link)',
-            type: 'string',
+            title: 'WhatsApp URL',
+            type: 'url',
         }),
         defineField({
             name: 'adminKey',
@@ -69,6 +69,15 @@ export const restaurantSettings = defineType({
             name: 'imagen_del_restaurante',
             title: 'Imagen del Restaurante',
             type: 'image',
+        }),
+        defineField({
+            name: 'backgroundImage',
+            title: 'Imagen de Fondo',
+            type: 'image',
+            options: {
+                hotspot: true, 
+            },
+            description: 'Sube una imagen para usar como fondo de pantalla.',
         }),
         defineField({
             name: 'googleMapsUrl',
