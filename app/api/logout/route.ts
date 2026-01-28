@@ -6,7 +6,6 @@ export async function POST(req: Request) {
 
     const res = NextResponse.json({ message: "Logged out" });
 
-    // ✅ Borra la cookie de admin_session
     res.cookies.set({
         name: "admin_session",
         value: "",

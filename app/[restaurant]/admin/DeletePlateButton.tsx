@@ -3,6 +3,7 @@
 import { useActionState, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { deletePlate } from './actions';
+import { DeleteIcon } from '../components/icons';
 
 type Props = {
     restaurantSlug: string;
@@ -35,7 +36,7 @@ export default function DeletePlateButton({ restaurantSlug, plateId, onSuccess }
                 className="p-2 bg-red-100 text-red-700 hover:bg-red-200 rounded-lg shadow-md transition"
                 title="Eliminar plato"
             >
-                🗑️
+                <DeleteIcon className="size-6" />
             </button>
 
             {/* ✅ SOLO EL MODAL VA AL PORTAL */}

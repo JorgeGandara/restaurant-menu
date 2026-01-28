@@ -32,7 +32,8 @@ export const PLATES_BY_RESTAURANT = groq`
     description,
     price,
     image,
-    category
+    category,
+    recipe
   }
 `;
 
@@ -44,7 +45,8 @@ export const ADMIN_PLATES_BY_RESTAURANT = groq`
     _id,
     name,
     price,
-    category
+    category,
+    recipe
   }
 `;
 
@@ -53,6 +55,7 @@ export const PLATE_BY_ID = groq`
     _id,
     name,
     description,
+    recipe,
     price,
     category
   }

@@ -47,12 +47,13 @@ export async function createPlate(_state: ActionState, formData: FormData): Prom
     return { message: "Restaurant ID or Slug is missing" };
   }
 
-  await checkAdminCookie(restaurantSlug);
+    await checkAdminCookie(restaurantSlug);
 
-  const name = formData.get("name") as string;
-  const description = formData.get("description") as string;
-  const price = Number(formData.get("price"));
-  const category = formData.get("category") as string;
+    const name = formData.get("name") as string;
+    const description = formData.get("description") as string;
+    const recipe = formData.get("recipe") as string;
+    const price = Number(formData.get("price"));
+    const category = formData.get("category") as string;
 
   if (!name || !category) {
     return { message: "Name and Category are required" };
@@ -65,6 +66,7 @@ export async function createPlate(_state: ActionState, formData: FormData): Prom
       _type: 'plate',
       name,
       description,
+      recipe,
       price,
       category,
       restaurant: {
@@ -88,6 +90,7 @@ export async function createPlate(_state: ActionState, formData: FormData): Prom
       _id: createdPlate._id,
       name: createdPlate.name,
       description: createdPlate.description,
+      recipe: createdPlate.recipe,
       price: createdPlate.price,
       category: createdPlate.category,
       restaurantId: restaurantId,
@@ -134,6 +137,7 @@ export async function editPlate(_state: ActionState, formData: FormData): Promis
 
   const name = formData.get("name") as string;
   const description = formData.get("description") as string;
+  const recipe = formData.get("recipe") as string;
   const price = Number(formData.get("price"));
   const category = formData.get("category") as string;
 
@@ -147,6 +151,7 @@ export async function editPlate(_state: ActionState, formData: FormData): Promis
     const updates: any = {
       name,
       description,
+      recipe,
       price,
       category,
     };
@@ -170,6 +175,7 @@ export async function editPlate(_state: ActionState, formData: FormData): Promis
       _id: updatedDoc._id,
       name: updatedDoc.name,
       description: updatedDoc.description,
+      recipe: updatedDoc.recipe,
       price: updatedDoc.price,
       category: updatedDoc.category,
       image: updatedDoc.image?.asset?._ref || "",
@@ -188,7 +194,7 @@ export async function editPlate(_state: ActionState, formData: FormData): Promis
       };
     }
 
-    // 🟢 MENU → UI optimista
+    // 🟢 MENU→  UI optimista
     return {
       success: true,
       plate: updatedPlate,

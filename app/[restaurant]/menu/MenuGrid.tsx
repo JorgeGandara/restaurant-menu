@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
 import { Plate } from "@/types/Plate";
 import { urlFor } from "@/sanity/lib/image";
 import PlateActions from "./PlateActions";
@@ -14,6 +15,8 @@ type MenuGridProps = {
 };
 
 export default function MenuGrid({ plates, restaurant, isAdmin, onPlateDeleted, onPlateUpdated }: MenuGridProps) {
+    const [openRecipes, setOpenRecipes] = useState<Record<string, boolean>>({});
+
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
             {plates.map((plate: Plate) => (
@@ -54,6 +57,39 @@ export default function MenuGrid({ plates, restaurant, isAdmin, onPlateDeleted, 
                         <p className="text-gray-700 text-sm leading-relaxed font-medium">
                             {plate.description}
                         </p>
+
+                        {isAdmin && plate.recipe && (
+                            <div className="mt-3 rounded-xl border border-orange-200 bg-white/90 shadow-sm">
+                                <button
+                                    type="button"
+                                    onClick={() =>
+                                        setOpenRecipes((prev) => ({
+                                            ...prev,
+                                            [plate._id]: !prev[plate._id],
+                                        }))
+                                    }
+                                    className="w-full flex items-center justify-between px-3 py-2 text-left"
+                                >
+                                    <div className="flex items-center gap-2">
+                                        <span className="h-2 w-2 rounded-full bg-orange-500" aria-hidden />
+                                        <span className="text-xs font-bold text-orange-700 uppercase tracking-wide">
+                                            Receta de {plate.name}
+                                        </span>
+                                    </div>
+                                    <span className={`text-orange-700 transition-transform ${openRecipes[plate._id] ? "rotate-180" : "rotate-0"}`}>
+                                        ▾
+                                    </span>
+                                </button>
+
+                                {openRecipes[plate._id] && (
+                                    <div className="px-3 pb-3">
+                                        <p className="text-gray-700 text-sm whitespace-pre-wrap leading-relaxed border-l-2 border-orange-200 pl-3">
+                                            {plate.recipe}
+                                        </p>
+                                    </div>
+                                )}
+                            </div>
+                        )}
                     </div>
                 </div>
             ))}

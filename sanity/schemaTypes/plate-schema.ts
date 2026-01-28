@@ -22,6 +22,11 @@ const plateSchema = {
             type: "text",
         },
         {
+            name: "recipe",
+            title: "Receta (Solo Admin)",
+            type: "text",
+        },
+        {
             name: "category",
             title: "Category",
             type: "string",

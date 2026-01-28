@@ -3,6 +3,7 @@
 import { useState } from "react";
 import EditPlateForm from "../admin/EditPlateForm";
 import DeletePlateButton from "../admin/DeletePlateButton";
+import { EditIcon } from "../components/icons";
 import { Plate } from "@/types/Plate";
 
 type PlateActionsProps = {
@@ -26,7 +27,7 @@ export default function PlateActions({ plate, restaurantSlug, isAdmin, onPlateDe
                     className="p-2 bg-white/90 backdrop-blur-sm rounded-lg shadow-md hover:shadow-lg transition"
                     title="Editar plato"
                 >
-                    ✏️
+                    <EditIcon className="size-6" />
                 </button>
 
                 <DeletePlateButton
