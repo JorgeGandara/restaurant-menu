@@ -5,20 +5,9 @@ import "./globals.css";
 import { client } from "../sanity/lib/client";
 import imageUrlBuilder from "@sanity/image-url";
 
-const montserrat = Montserrat({
-  variable: "--font-montserrat",
-  subsets: ["latin"],
-});
+// Fuente de Google Fonts y fuente local
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-});
 
-const faith = localFont({
-  src: "./fonts/faith.ttf",
-  variable: "--font-faith",
-});
 
 const builder = imageUrlBuilder(client);
 
@@ -36,24 +25,30 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // Obtén las configuraciones de Sanity
   const settings = await client.fetch(
-    `*[_type == "restaurantSettings" && restaurant->slug.current == "your_slug"][0]{backgroundImage}`
+    `*[_type == "restaurantSettings" && restaurant->slug.current == "marviche"][0]{
+      backgroundImage,
+      typography
+    }`
   );
 
   const backgroundImageUrl = settings?.backgroundImage
     ? urlFor(settings.backgroundImage).url()
     : null;
 
+  const typography = settings?.typography || {};
+  console.log("Typography settings:", typography);
   return (
-    <html lang="es">
+    <html
+      lang="es"
+      style={{
+        "--font-family": typography.fontFamily || "var(--font-montserrat)",
+        "--font-size": typography.fontSize || "16px",
+        "--font-weight": typography.fontWeight || "400",
+      } as React.CSSProperties}
+    >
       <body
-        className={`
-          ${montserrat.variable}
-          ${playfair.variable}
-          ${faith.variable}
-          antialiased
-          min-h-screen
-        `}
         style={{
           backgroundImage: backgroundImageUrl
             ? `url(${backgroundImageUrl})`

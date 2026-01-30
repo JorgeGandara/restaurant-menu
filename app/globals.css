@@ -1,27 +1,20 @@
 @import "tailwindcss";
 @tailwind utilities;
 
-@theme {
-  --font-sans: var(--font-montserrat), sans-serif;
-  --font-serif: var(--font-playfair), serif;
-  --font-faith: var(--font-faith), serif;
-}
-
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --font-color-white: #ffffff;
-  --font-color-black: #000000;
+  --font-family: var(--font-montserrat);
+  --font-size: 16px;
+  --font-weight: 400;
 }
 
 body {
-  background: var(--background);
-  color: var(--font-color-black);
-  font-family: var(--font-montserrat), sans-serif;
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
 }
 
 h1 {
-  font-family: var(--font-faith), serif;
+  font-family: var(--font-faith);
 }
 
 h2,
@@ -29,7 +22,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-montserrat), sans-serif;
+  font-family: var(--font-family);
   font-weight: 700;
 }
 

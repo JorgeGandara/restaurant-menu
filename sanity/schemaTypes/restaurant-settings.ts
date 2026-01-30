@@ -131,18 +131,19 @@ export const restaurantSettings = defineType({
             },
             fields: [
                 defineField({
-                    name: 'fontFamily',
-                    title: 'Familia tipográfica',
-                    type: 'string',
+                    name: "fontFamily",
+                    title: "Familia tipográfica",
+                    type: "string",
                     options: {
                         list: [
-                            { title: 'Inter', value: 'Inter, sans-serif' },
-                            { title: 'Roboto', value: 'Roboto, sans-serif' },
-                            { title: 'Poppins', value: 'Poppins, sans-serif' },
-                            { title: 'Montserrat', value: 'Montserrat, sans-serif' },
+                        { title: "Montserrat", value: "var(--font-montserrat)" },
+                        { title: "Playfair Display", value: "var(--font-playfair)" },
+                        { title: "Faith", value: "var(--font-faith)" },
                         ],
                     },
+                    initialValue: "var(--font-montserrat)",
                 }),
+
                 defineField({
                     name: 'fontSize',
                     title: 'Tamaño base',
