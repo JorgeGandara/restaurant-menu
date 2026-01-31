@@ -32,7 +32,7 @@ export default function MenuClient({ initialPlates, restaurant, restaurantId, is
     };
 
     return (
-        <main className="w-full min-h-screen p-6 pb-20">
+        <main className="w-full min-h-screen p-4 bg-gradient-to-br from-orange-50/10 via-gray-50/50 to-orange-50/10 ">
 
             {/* Back Button */}
             <div className="max-w-6xl mx-auto mb-6 flex justify-start">
