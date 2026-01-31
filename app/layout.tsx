@@ -38,7 +38,6 @@ export default async function RootLayout({
     : null;
 
   const typography = settings?.typography || {};
-  console.log("Typography settings:", typography);
   return (
     <html
       lang="es"
