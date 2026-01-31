@@ -39,7 +39,7 @@ export async function getRestaurantSettings(restaurantSlug: string) {
         {
             next: { revalidate: 30 },
         }
-    );
+    )
 }
 
 export async function getPlate(id: string) {
