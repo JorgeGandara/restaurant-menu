@@ -20,6 +20,7 @@ export default async function Home({ params }: HomeProps) {
   }
 
   const settings = await getRestaurantSettings(restaurant);
+  console.log(settings.typography);
 
   if (!settings) {
     notFound();

@@ -2,28 +2,14 @@
 @tailwind utilities;
 
 :root {
-  --font-family: var(--font-montserrat);
-  --font-size: 16px;
-  --font-weight: 400;
+  --restaurant-font: var(--font-montserrat);
+  --restaurant-size: 16px;
+  --restaurant-weight: 400;
 }
 
-body {
-  font-family: var(--font-family);
-  font-size: var(--font-size);
-  font-weight: var(--font-weight);
-}
-
-h1 {
-  font-family: var(--font-faith);
-}
-
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-family);
-  font-weight: 700;
+/* Asegura que los elementos hereden las fuentes del padre */
+* {
+  font-family: inherit;
 }
 
 @layer components {

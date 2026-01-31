@@ -123,7 +123,7 @@ export const restaurantSettings = defineType({
         }),
         defineField({
             name: 'typography',
-            title: 'Tipografía del Documento',
+            title: 'Tipografía del Menú',
             type: 'object',
             options: {
                 collapsible: true,
@@ -132,13 +132,30 @@ export const restaurantSettings = defineType({
             fields: [
                 defineField({
                     name: "fontFamily",
-                    title: "Familia tipográfica",
+                    title: "Fuente Principal",
                     type: "string",
+                    description: "Fuente que se aplicará a todo el menú",
                     options: {
                         list: [
-                        { title: "Montserrat", value: "var(--font-montserrat)" },
-                        { title: "Playfair Display", value: "var(--font-playfair)" },
-                        { title: "Faith", value: "var(--font-faith)" },
+                            // Elegantes
+                            { title: "Playfair Display (Elegante)", value: "var(--font-playfair)" },
+                            { title: "Cormorant (Sofisticada)", value: "var(--font-cormorant)" },
+                            { title: "Lora (Clásica)", value: "var(--font-lora)" },
+                            { title: "Crimson Text (Editorial)", value: "var(--font-crimson)" },
+                            
+                            // Modernas
+                            { title: "Montserrat (Moderna)", value: "var(--font-montserrat)" },
+                            { title: "Poppins (Amigable)", value: "var(--font-poppins)" },
+                            { title: "Inter (Clean)", value: "var(--font-inter)" },
+                            { title: "Nunito (Suave)", value: "var(--font-nunito)" },
+                            
+                            // Impactantes
+                            { title: "Bebas Neue (Bold)", value: "var(--font-bebas)" },
+                            { title: "Oswald (Fuerte)", value: "var(--font-oswald)" },
+                            { title: "Righteous (Casual Bold)", value: "var(--font-righteous)" },
+                            
+                            // Artesanales
+                            { title: "Dancing Script (Script)", value: "var(--font-dancing)" },
                         ],
                     },
                     initialValue: "var(--font-montserrat)",
@@ -146,13 +163,15 @@ export const restaurantSettings = defineType({
 
                 defineField({
                     name: 'fontSize',
-                    title: 'Tamaño base',
+                    title: 'Tamaño Base',
                     type: 'string',
+                    description: 'Tamaño general del texto',
                     options: {
                         list: [
                             { title: 'Pequeño (14px)', value: '14px' },
-                            { title: 'Normal (16px)', value: '16px' },
-                            { title: 'Grande (18px)', value: '18px' },
+                            { title: 'Normal (16px) - Recomendado ✅', value: '16px' },
+                            { title: 'Grande (17px)', value: '17px' },
+                            { title: 'Extra Grande (18px)', value: '18px' },
                         ],
                     },
                     initialValue: '16px',
@@ -160,14 +179,16 @@ export const restaurantSettings = defineType({
 
                 defineField({
                     name: 'fontWeight',
-                    title: 'Peso',
+                    title: 'Peso de la Fuente',
                     type: 'number',
+                    description: 'Grosor del texto',
                     options: {
                         list: [
-                            { title: 'Light', value: 300 },
-                            { title: 'Regular', value: 400 },
-                            { title: 'Medium', value: 500 },
-                            { title: 'Bold', value: 700 },
+                            { title: 'Light (300)', value: 300 },
+                            { title: 'Regular (400) - Recomendado ✅', value: 400 },
+                            { title: 'Medium (500)', value: 500 },
+                            { title: 'SemiBold (600)', value: 600 },
+                            { title: 'Bold (700)', value: 700 },
                         ],
                     },
                     initialValue: 400,
