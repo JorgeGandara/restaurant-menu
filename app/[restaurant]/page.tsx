@@ -20,8 +20,6 @@ export default async function Home({ params }: HomeProps) {
   }
 
   const settings = await getRestaurantSettings(restaurant);
-  console.log(settings.typography);
-
   if (!settings) {
     notFound();
   }
@@ -87,7 +85,7 @@ export default async function Home({ params }: HomeProps) {
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"></div>
                     <div className="absolute inset-0 bg-gradient-to-br from-orange-400/0 to-orange-600/0 group-hover:from-orange-400/20 group-hover:to-orange-600/20 transition-all duration-500"></div>
                     <span className="text-xl font-bold tracking-wide text-gray-900 drop-shadow-sm relative z-10 group-hover:text-orange-900 group-hover:scale-110 transition-all duration-300 inline-block">
-                      ✨ Ver Menú
+                      Ver Menú
                     </span>
                   </div>
                 </div>
@@ -105,7 +103,7 @@ export default async function Home({ params }: HomeProps) {
                       {/* Efecto de brillo sutil */}
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-orange-200/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"></div>
                       <span className="text-lg font-medium text-gray-900 relative z-10 group-hover:text-orange-800 group-hover:scale-105 transition-all duration-300 inline-block">
-                        📍 Ubicación
+                        Ubicación
                       </span>
                     </div>
                   </div>
@@ -120,7 +118,7 @@ export default async function Home({ params }: HomeProps) {
                       {/* Efecto de brillo sutil */}
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-orange-200/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"></div>
                       <span className="text-lg font-medium text-gray-900 relative z-10 group-hover:text-orange-800 group-hover:scale-105 transition-all duration-300 inline-block">
-                        💬 Contacto
+                        Contacto
                       </span>
                     </div>
                   </div>

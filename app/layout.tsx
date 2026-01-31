@@ -131,7 +131,7 @@ export default async function RootLayout({
 }) {
   // Obtén las configuraciones de Sanity
   const settings = await client.fetch(
-    `*[_type == "restaurantSettings" && restaurant->slug.current == "marviche"][0]{
+    `*[_type == "restaurantSettings" && restaurant->slug.current == "tmm-restaurant"][0]{
       backgroundImage,
       typography
     }`

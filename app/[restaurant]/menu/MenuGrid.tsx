@@ -10,7 +10,7 @@ type MenuGridProps = {
     plates: Plate[];
     restaurant: string;
     isAdmin: boolean;
-    onPlateDeleted?: (plateId: string) => void; // ✅ prop
+    onPlateDeleted?: (plateId: string) => void;
     onPlateUpdated?: (plate: Plate) => void;
 };
 
@@ -29,7 +29,7 @@ export default function MenuGrid({ plates, restaurant, isAdmin, onPlateDeleted, 
                             plate={plate}
                             restaurantSlug={restaurant}
                             isAdmin={isAdmin}
-                            onPlateDeleted={onPlateDeleted} // ✅ prop
+                            onPlateDeleted={onPlateDeleted}
                             onPlateUpdated={onPlateUpdated}
                         />
                     )}

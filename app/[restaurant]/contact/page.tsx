@@ -82,8 +82,8 @@ export default async function Contact({ params }: ContactProps) {
 
                         {/* Información de contacto - centrado */}
                         <div className="flex flex-col gap-4 w-full text-gray-800">
-                            {info(settings.phone, "Teléfono", "📞")}
-                            {info(settings.email, "Correo", "✉️")}
+                            {info(settings.phone, "Teléfono")}
+                            {info(settings.email, "Correo")}
                         </div>
 
                         {/* Separador */}
@@ -91,7 +91,6 @@ export default async function Contact({ params }: ContactProps) {
                             <div className="w-full h-px bg-gradient-to-r from-transparent via-orange-500/40 to-transparent mb-6"></div>
 
                             <h2 className="text-sm uppercase tracking-wider font-bold mb-4 flex items-center justify-center gap-2">
-                                <span className="text-lg">🌐</span>
                                 <span className="bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent">
                                     Redes Sociales
                                 </span>
@@ -111,7 +110,7 @@ export default async function Contact({ params }: ContactProps) {
 }
 
 /* Helpers - centrados */
-function info(value?: string, label?: string, icon = "ℹ️") {
+function info(value?: string, label?: string) {
     if (!value) return null;
 
 
@@ -124,7 +123,6 @@ function info(value?: string, label?: string, icon = "ℹ️") {
                 <div className="glass-content flex-col items-center text-center p-4 bg-gradient-to-br from-white/40 to-orange-50/20 relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-orange-100/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"></div>
                     <p className="text-xs text-orange-600 font-bold uppercase tracking-wider mb-2 relative z-10 flex items-center gap-2">
-                        <span className="inline-block group-hover:scale-110 transition-transform duration-300">{icon}</span>
                         {label}
                     </p>
                     <p className="text-lg font-medium relative z-10 group-hover:text-orange-900 transition-colors duration-300">

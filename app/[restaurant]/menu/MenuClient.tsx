@@ -151,13 +151,6 @@ export default function MenuClient({ initialPlates, restaurant, restaurantId, is
 
                     {/* Observer Target - solo si hay más items */}
                     {hasMore && <div ref={observerTarget} className="h-4" />}
-
-                    {/* temporal */}
-                    {!hasMore && displayedPlates.length > 0 && (
-                        <div className="text-center py-8 text-gray-500">
-                            ✨ Has visto todos los platos
-                        </div>
-                    )}
                 </div>
             </div>
 

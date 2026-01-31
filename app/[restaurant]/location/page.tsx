@@ -127,7 +127,6 @@ export default async function Location({ params }: LocationProps) {
                                     <div className="glass-content flex-col items-center text-center p-4 bg-gradient-to-br from-white/40 to-orange-50/20 relative overflow-hidden">
                                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-orange-100/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"></div>
                                         <p className="text-xs text-orange-600 font-bold uppercase tracking-wider mb-2 relative z-10 flex items-center gap-2">
-                                            <span className="inline-block animate-pulse">📍</span>
                                             Dirección
                                         </p>
                                         <p className="text-lg font-medium leading-tight mb-4 relative z-10 group-hover:text-orange-900 transition-colors duration-300">
@@ -171,7 +170,6 @@ export default async function Location({ params }: LocationProps) {
                                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-orange-100/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"></div>
 
                                             <h3 className="text-sm font-bold text-gray-700 mb-4 flex items-center gap-2 relative z-10">
-                                                <span className="text-lg">🎬</span>
                                                 <span className="bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent">
                                                     ¿Cómo puedo llegar?
                                                 </span>
