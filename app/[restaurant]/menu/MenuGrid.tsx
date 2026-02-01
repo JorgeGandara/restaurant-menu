@@ -19,19 +19,9 @@ export default function MenuGrid({ plates, restaurant, isAdmin, onPlateDeleted, 
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
-            {plates.map((plate: Plate, index: number) => {
-                const showHeader = index === 0 || (plates[index - 1].category || "Otros") !== (plate.category || "Otros");
-                const categoryTitle = plate.category || "Otros";
-
+            {plates.map((plate: Plate) => {
                 return (
                     <div key={plate._id} className="contents">
-                        {showHeader && (
-                            <div className="col-span-full mt-8 mb-4 first:mt-0">
-                                <h3 className="text-3xl font-serif font-bold text-[color:color-mix(in_srgb,var(--primary-color),black_20%)] border-b-2 border-[color:color-mix(in_srgb,var(--primary-color),white_80%)] pb-2 capitalize">
-                                    {categoryTitle}
-                                </h3>
-                            </div>
-                        )}
                         <div
                             className="flex flex-col rounded-xl p-3 relative bg-white/40 shadow-sm backdrop-blur-sm"
                         >

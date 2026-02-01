@@ -47,7 +47,7 @@ export async function login(
         httpOnly: true,
         secure: false,
         path: "/",
-        maxAge: 60 * 60 * 24,
+        maxAge: 60 * 60 * 2,
     });
 
     // 4. Return success instead of Redirecting

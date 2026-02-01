@@ -40,6 +40,11 @@
   .glass-container {
     @apply relative flex items-center bg-transparent overflow-hidden flex-auto transition-all duration-300;
 
+
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
     /* Radio base de 2rem */
     @apply rounded-[2rem];
 
@@ -81,7 +86,7 @@
 
   .glass-overlay {
     @apply z-10;
-    background-color: rgba(255, 255, 255, 0.25);
+    background-color: rgba(255, 255, 255, 0.15);
     /* var(--lg-bg-color) */
   }
 
