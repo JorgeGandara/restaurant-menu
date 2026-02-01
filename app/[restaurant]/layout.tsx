@@ -47,20 +47,25 @@ export default async function RestaurantLayout({
 
     return (
         <div
-            className="min-h-screen"
+            className="relative min-h-dvh w-full"
             style={{
-                backgroundImage: settings.backgroundImage ? `url('${urlFor(settings.backgroundImage).url()}')` : undefined,
-                backgroundColor: "rgba(0, 0, 0, 0.3)",
-                backgroundBlendMode: "darken",
-                backgroundAttachment: "fixed",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
                 fontFamily: settings.typography?.fontFamily || 'inherit',
                 fontSize: settings.typography?.fontSize ? `${settings.typography.fontSize}px` : 'inherit',
                 fontWeight: settings.typography?.fontWeight || 'inherit',
                 "--primary-color": settings.primaryColor || "#EA580C",
             } as React.CSSProperties}
         >
+            {/* Background absoluto para ocupar toda la pantalla */}
+            <div 
+                className="fixed inset-0 w-full h-full -z-10"
+                style={{
+                    backgroundImage: settings.backgroundImage ? `url('${urlFor(settings.backgroundImage).url()}')` : undefined,
+                    backgroundColor: "rgba(0, 0, 0, 0.3)",
+                    backgroundBlendMode: "darken",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                }}
+            />
             {children}
         </div>
 

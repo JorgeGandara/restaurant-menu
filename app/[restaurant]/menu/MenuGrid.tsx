@@ -24,7 +24,7 @@ export default function MenuGrid({ plates, restaurant, isAdmin, onPlateDeleted, 
                 const categoryTitle = plate.category || "Otros";
 
                 return (
-                    <div key={plate._id} className="contents">
+                    <div key={`${index}-${plate._id}`} className="contents">
                         {showHeader && (
                             <div className="col-span-full mt-8 mb-4 first:mt-0">
                                 <h3 className="text-3xl font-serif font-bold text-[color:color-mix(in_srgb,var(--primary-color),black_20%)] border-b-2 border-[color:color-mix(in_srgb,var(--primary-color),white_80%)] pb-2 capitalize">

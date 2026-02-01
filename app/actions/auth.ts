@@ -11,8 +11,6 @@ export async function login(
     const password = formData.get("password") as string;
     const restaurantSlug = formData.get("restaurantSlug") as string;
 
-    console.log("🔐 Login attempt:", { restaurantSlug, passwordLength: password?.length });
-
     if (!password || !restaurantSlug) {
         return { error: "Faltan datos" };
     }
@@ -20,22 +18,10 @@ export async function login(
     // 1. Fetch admin key from Sanity
     const adminKey = await getAdminKey(restaurantSlug);
 
-    console.log("🔑 Admin key from Sanity:", {
-        adminKey,
-        adminKeyType: typeof adminKey,
-        adminKeyLength: adminKey?.length
-    });
-
     if (!adminKey) {
         return { error: "No se ha configurado una clave para este restaurante." };
     }
 
-    // 2. Validate
-    console.log("🔍 Comparing passwords:", {
-        passwordMatch: password === adminKey,
-        password,
-        adminKey
-    });
 
     if (password !== adminKey) {
         return { error: "Contraseña incorrecta" };

@@ -107,7 +107,7 @@ export default async function Contact({ params }: ContactProps) {
                             <div className="flex gap-3 flex-wrap justify-center">
                                 {social(settings.instagram, "Instagram", "/icons/instagram.webp")}
                                 {social(settings.facebook, "Facebook", "/icons/facebook.png")}
-                                {social(settings.whatsapp, "WhatsApp", "/icons/whatsapp.png")}
+                                {social(settings.whatsapp, "WhatsApp", "/icons/Whatsapp.png")}
                             </div>
                         </div>
                     </div>

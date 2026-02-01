@@ -66,3 +66,10 @@ export const PLATE_BY_ID = groq`
 export const GET_ADMIN_KEY = groq`
   *[_type == "restaurantSettings" && restaurant->slug.current == $slug][0].adminKey
 `;
+
+export const CATEGORIES_BY_RESTAURANT = groq`
+  *[_type == "category" && restaurant->slug.current == $slug] | order(name asc){
+    _id,
+    name
+  }
+`;

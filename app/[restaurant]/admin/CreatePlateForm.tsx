@@ -5,7 +5,10 @@ import { createPlate } from './actions';
 import { Plate } from '@/types/Plate';
 import { uploadImageClient } from '@/sanity/lib/uploadImagenClient';
 
-
+type Category = {
+  _id: string;
+  name: string;
+};
 
 type Props = {
   restaurantId: string;
@@ -19,6 +22,26 @@ export default function CreatePlateForm({ restaurantId, restaurantSlug, onSucces
   const [state, formAction] = useActionState(createPlate, initialState);
   const [imageAssetId, setImageAssetId] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loadingCategories, setLoadingCategories] = useState(true);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch(`/api/categories?restaurant=${restaurantSlug}`);
+        if (response.ok) {
+          const data = await response.json();
+          setCategories(data);
+        }
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      } finally {
+        setLoadingCategories(false);
+      }
+    };
+
+    fetchCategories();
+  }, [restaurantSlug]);
 
   useEffect(() => {
     if (!state?.success) return;
@@ -117,13 +140,15 @@ export default function CreatePlateForm({ restaurantId, restaurantSlug, onSucces
           id="category"
           name="category"
           required
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[var(--primary-color)] focus:ring-[var(--primary-color)] sm:text-sm border p-2"
+          disabled={loadingCategories}
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[var(--primary-color)] focus:ring-[var(--primary-color)] sm:text-sm border p-2 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          <option value="">Selecciona una categoría</option>
-          <option value="entradas">Entradas</option>
-          <option value="platos-fuertes">Platos Fuertes</option>
-          <option value="postres">Postres</option>
-          <option value="bebidas">Bebidas</option>
+          <option value="">{loadingCategories ? 'Cargando categorías...' : 'Selecciona una categoría'}</option>
+          {categories.map((cat) => (
+            <option key={cat._id} value={cat.name}>
+              {cat.name}
+            </option>
+          ))}
         </select>
       </div>
 

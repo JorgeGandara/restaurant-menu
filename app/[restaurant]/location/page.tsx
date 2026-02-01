@@ -101,22 +101,15 @@ export default async function Location({ params }: LocationProps) {
                         {/* Restaurant Image - ocupando todo el espacio */}
                         {settings.imagen_del_restaurante && urlFor(settings.imagen_del_restaurante).url() && (
                             <div className="w-full mb-6 group">
-                                <div className="glass-container glass-container--rounded w-full p-0 overflow-hidden transition-all duration-500 hover:shadow-[0_20px_25px_-5px_color-mix(in_srgb,var(--primary-color),transparent_70%)] shadow-lg group-hover:-translate-y-1">
-                                    <div className="glass-filter"></div>
-                                    <div className="glass-overlay"></div>
-                                    <div className="glass-specular"></div>
-                                    <div className="glass-content p-2 relative">
-                                        <div className="w-full h-48 relative rounded-lg overflow-hidden border-2 border-white/30">
-                                            <Image
-                                                src={urlFor(settings.imagen_del_restaurante).url()}
-                                                alt={settings.name}
-                                                fill
-                                                className="object-cover transition-transform duration-700 group-hover:scale-110"
-                                                sizes="(max-width: 768px) 100vw, 448px"
-                                                priority
-                                            />
-                                        </div>
-                                    </div>
+                                <div className="w-full rounded-lg overflow-hidden shadow-lg transition-all duration-500 hover:shadow-[0_20px_25px_-5px_color-mix(in_srgb,var(--primary-color),transparent_70%)] group-hover:-translate-y-1 h-48 relative border-2 border-white/30">
+                                    <Image
+                                        src={urlFor(settings.imagen_del_restaurante).url()}
+                                        alt={settings.name}
+                                        fill
+                                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                        sizes="(max-width: 768px) 100vw, 448px"
+                                        priority
+                                    />
                                 </div>
                             </div>
                         )}
