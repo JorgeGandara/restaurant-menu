@@ -15,7 +15,7 @@ export default function AdminButton({ restaurant }: AdminButtonProps) {
                     <div className="glass-filter"></div>
                     <div className="glass-overlay"></div>
                     <div className="glass-specular"></div>
-                    <div className="glass-content px-6 py-3 bg-orange-500/30">
+                    <div className="glass-content px-6 py-3 bg-[color:color-mix(in_srgb,var(--primary-color),transparent_70%)]">
                         <div className="flex items-center gap-2">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"

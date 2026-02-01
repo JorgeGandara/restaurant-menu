@@ -1,36 +1,15 @@
 @import "tailwindcss";
 @tailwind utilities;
 
-@theme {
-  --font-sans: var(--font-montserrat), sans-serif;
-  --font-serif: var(--font-playfair), serif;
-  --font-faith: var(--font-faith), serif;
-}
-
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --font-color-white: #ffffff;
-  --font-color-black: #000000;
+  --restaurant-font: var(--font-montserrat);
+  --restaurant-size: 16px;
+  --restaurant-weight: 400;
 }
 
-body {
-  background: var(--background);
-  color: var(--font-color-black);
-  font-family: var(--font-montserrat), sans-serif;
-}
-
-h1 {
-  font-family: var(--font-faith), serif;
-}
-
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-montserrat), sans-serif;
-  font-weight: 700;
+/* Asegura que los elementos hereden las fuentes del padre */
+* {
+  font-family: inherit;
 }
 
 @layer components {

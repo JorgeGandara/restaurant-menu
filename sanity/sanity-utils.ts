@@ -1,5 +1,5 @@
 import { createClient, groq } from "next-sanity";
-import { PLATES_BY_RESTAURANT, RESTAURANT_BY_SLUG, PLATE_BY_ID, ADMIN_PLATES_BY_RESTAURANT, GET_ADMIN_KEY} from "./queries";
+import { PLATES_BY_RESTAURANT, RESTAURANT_BY_SLUG, PLATE_BY_ID, ADMIN_PLATES_BY_RESTAURANT, GET_ADMIN_KEY } from "./queries";
 
 const client = createClient({
     projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,

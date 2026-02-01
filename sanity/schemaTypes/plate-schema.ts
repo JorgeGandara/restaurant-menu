@@ -22,18 +22,30 @@ const plateSchema = {
             type: "text",
         },
         {
+            name: "recipe",
+            title: "Receta (Solo Admin)",
+            type: "text",
+        },
+        {
             name: "category",
             title: "Category",
-            type: "string",
+            type: "reference",
+            to: [{ type: "category" }],
             options: {
-                list: [
-                    { title: "Entradas", value: "entradas" },
-                    { title: "Platos Fuertes", value: "platos-fuertes" },
-                    { title: "Postres", value: "postres" },
-                    { title: "Bebidas", value: "bebidas" },
-                ],
-                layout: "dropdown",
-            },
+                filter: ({ document }: any) => {
+                    if (!document?.restaurant) {
+                        return {
+                            filter: '!defined(restaurant)',
+                        }
+                    }
+                    return {
+                        filter: 'restaurant._ref == $restaurantId',
+                        params: {
+                            restaurantId: document.restaurant._ref
+                        }
+                    }
+                }
+            }
         },
         {
             name: "image",

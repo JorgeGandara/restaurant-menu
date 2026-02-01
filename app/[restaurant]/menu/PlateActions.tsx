@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import EditPlateForm from "../admin/EditPlateForm";
 import DeletePlateButton from "../admin/DeletePlateButton";
+import { EditIcon } from "../components/icons";
 import { Plate } from "@/types/Plate";
 
 type PlateActionsProps = {
@@ -26,7 +28,7 @@ export default function PlateActions({ plate, restaurantSlug, isAdmin, onPlateDe
                     className="p-2 bg-white/90 backdrop-blur-sm rounded-lg shadow-md hover:shadow-lg transition"
                     title="Editar plato"
                 >
-                    ✏️
+                    <EditIcon className="size-6" />
                 </button>
 
                 <DeletePlateButton
@@ -36,28 +38,32 @@ export default function PlateActions({ plate, restaurantSlug, isAdmin, onPlateDe
                 />
             </div>
 
-            {showEdit && (
-                <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center">
-                    <div className="bg-white rounded-xl p-6 w-full max-w-lg relative">
-                        <h2 className="text-xl font-bold mb-4">Editar plato</h2>
+            {showEdit &&
+                typeof document !== "undefined" &&
+                createPortal(
+                    <div className="fixed inset-0 z-[9999] bg-black/40 flex items-center justify-center p-4">
+                        <div className="absolute inset-0 z-0" onClick={() => setShowEdit(false)}></div>
+                        <div className="bg-white rounded-xl p-6 w-full max-w-lg relative z-10 max-h-[90vh] overflow-y-auto shadow-2xl animate-in zoom-in-95 duration-200">
+                            <h2 className="text-xl font-bold mb-4">Editar plato</h2>
 
-                        <EditPlateForm
-                            plate={plate}
-                            restaurantSlug={restaurantSlug}
-                            onSuccess={() => setShowEdit(false)}
-                            onPlateUpdated={onPlateUpdated}
-                            mode="menu"
-                        />
+                            <EditPlateForm
+                                plate={plate}
+                                restaurantSlug={restaurantSlug}
+                                onSuccess={() => setShowEdit(false)}
+                                onPlateUpdated={onPlateUpdated}
+                                mode="menu"
+                            />
 
-                        <button
-                            onClick={() => setShowEdit(false)}
-                            className="absolute top-3 right-3 text-gray-500 hover:text-black"
-                        >
-                            ✕
-                        </button>
-                    </div>
-                </div>
-            )}
+                            <button
+                                onClick={() => setShowEdit(false)}
+                                className="absolute top-3 right-3 text-gray-500 hover:text-black p-1"
+                            >
+                                ✕
+                            </button>
+                        </div>
+                    </div>,
+                    document.body
+                )}
         </>
     );
 }
