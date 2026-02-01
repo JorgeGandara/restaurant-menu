@@ -64,7 +64,7 @@ export default function EditPlateForm({ restaurantSlug, plate, onSuccess, onPlat
           name="name"
           required
           defaultValue={plate.name}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 sm:text-sm border p-2"
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[var(--primary-color)] focus:ring-[var(--primary-color)] sm:text-sm border p-2"
         />
       </div>
 
@@ -78,7 +78,7 @@ export default function EditPlateForm({ restaurantSlug, plate, onSuccess, onPlat
           name="description"
           rows={3}
           defaultValue={plate.description}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 sm:text-sm border p-2"
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[var(--primary-color)] focus:ring-[var(--primary-color)] sm:text-sm border p-2"
         />
       </div>
 
@@ -93,7 +93,7 @@ export default function EditPlateForm({ restaurantSlug, plate, onSuccess, onPlat
           rows={5}
           defaultValue={plate.recipe || ""}
           placeholder="Ingredientes y pasos de preparación..."
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 sm:text-sm border p-2"
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[var(--primary-color)] focus:ring-[var(--primary-color)] sm:text-sm border p-2"
         />
       </div>
 
@@ -109,7 +109,7 @@ export default function EditPlateForm({ restaurantSlug, plate, onSuccess, onPlat
           min="0"
           step="0.01"
           defaultValue={plate.price}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 sm:text-sm border p-2"
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[var(--primary-color)] focus:ring-[var(--primary-color)] sm:text-sm border p-2"
         />
       </div>
 
@@ -123,7 +123,7 @@ export default function EditPlateForm({ restaurantSlug, plate, onSuccess, onPlat
           name="category"
           required
           defaultValue={plate.category}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 sm:text-sm border p-2"
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[var(--primary-color)] focus:ring-[var(--primary-color)] sm:text-sm border p-2"
         >
           <option value="">Selecciona una categoría</option>
           <option value="entradas">Entradas</option>
@@ -155,7 +155,7 @@ export default function EditPlateForm({ restaurantSlug, plate, onSuccess, onPlat
           id="image"
           accept="image/*"
           onChange={handleImageChange}
-          className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-50 file:text-orange-700 hover:file:bg-orange-100"
+          className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold text-[color:color-mix(in_srgb,var(--primary-color),black_20%)] file:bg-[color:color-mix(in_srgb,var(--primary-color),white_90%)] file:text-[color:color-mix(in_srgb,var(--primary-color),black_20%)] hover:file:bg-[color:color-mix(in_srgb,var(--primary-color),white_80%)]"
         />
       </div>
 
@@ -164,7 +164,7 @@ export default function EditPlateForm({ restaurantSlug, plate, onSuccess, onPlat
         <button
           type="submit"
           disabled={isPending || uploading}
-          className="flex-1 justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 Transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[var(--primary-color)] hover:bg-[color:color-mix(in_srgb,var(--primary-color),black_10%)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--primary-color)] Transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {uploading ? 'Subiendo imagen...' : isPending ? 'Guardando...' : 'Guardar Cambios'}
         </button>

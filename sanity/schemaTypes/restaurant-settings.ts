@@ -54,6 +54,17 @@ export const restaurantSettings = defineType({
             type: 'url',
         }),
         defineField({
+            name: 'primaryColor',
+            title: 'Color de Énfasis',
+            description: 'Color principal para botones y textos destacados (Hex code, ej: #EA580C)',
+            type: 'string',
+            validation: Rule => Rule.regex(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/, {
+                name: 'hex', // Error message is "Must be a valid hex color"
+                invert: false, // Boolean to allow any value that does NOT match pattern
+            }).error('Debe ser un código hexadecimal válido (ej: #EA580C)'),
+            initialValue: '#EA580C',
+        }),
+        defineField({
             name: 'adminKey',
             title: 'Clave de Administrador',
             description: 'Clave para acceder al panel de administración',
@@ -75,9 +86,15 @@ export const restaurantSettings = defineType({
             title: 'Imagen de Fondo',
             type: 'image',
             options: {
-                hotspot: true, 
+                hotspot: true,
             },
             description: 'Sube una imagen para usar como fondo de pantalla.',
+        }),
+        defineField({
+            name: 'favicon',
+            title: 'Favicon',
+            type: 'image',
+            description: 'Icono de la pestaña del navegador. Se recomienda formato .png o .svg (Sanity procesa mejor estos formatos que .ico).',
         }),
         defineField({
             name: 'googleMapsUrl',
@@ -142,18 +159,18 @@ export const restaurantSettings = defineType({
                             { title: "Cormorant (Sofisticada)", value: "var(--font-cormorant)" },
                             { title: "Lora (Clásica)", value: "var(--font-lora)" },
                             { title: "Crimson Text (Editorial)", value: "var(--font-crimson)" },
-                            
+
                             // Modernas
                             { title: "Montserrat (Moderna)", value: "var(--font-montserrat)" },
                             { title: "Poppins (Amigable)", value: "var(--font-poppins)" },
                             { title: "Inter (Clean)", value: "var(--font-inter)" },
                             { title: "Nunito (Suave)", value: "var(--font-nunito)" },
-                            
+
                             // Impactantes
                             { title: "Bebas Neue (Bold)", value: "var(--font-bebas)" },
                             { title: "Oswald (Fuerte)", value: "var(--font-oswald)" },
                             { title: "Righteous (Casual Bold)", value: "var(--font-righteous)" },
-                            
+
                             // Artesanales
                             { title: "Dancing Script (Script)", value: "var(--font-dancing)" },
                         ],

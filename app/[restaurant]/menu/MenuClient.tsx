@@ -26,14 +26,14 @@ export default function MenuClient({ initialPlates, restaurant, restaurantId, is
     // Función para cargar más platos (memoizada para evitar recreaciones)
     const loadMorePlates = useCallback(() => {
         if (isLoading) return;
-        
+
         const startIndex = page * ITEMS_PER_PAGE;
         const endIndex = startIndex + ITEMS_PER_PAGE;
-        
+
         if (startIndex >= plates.length) return;
 
         setIsLoading(true);
-        
+
         setTimeout(() => {
             const newPlates = plates.slice(startIndex, endIndex);
             setDisplayedPlates(prev => [...prev, ...newPlates]);
@@ -97,7 +97,9 @@ export default function MenuClient({ initialPlates, restaurant, restaurantId, is
     const hasMore = page * ITEMS_PER_PAGE < plates.length;
 
     return (
-        <main className="w-full min-h-screen p-4 bg-gradient-to-br from-orange-50/10 via-gray-50/50 to-orange-50/10 ">
+        <main
+            className="w-full min-h-screen p-4"
+        >
             {/* Back Button */}
             <div className="max-w-6xl mx-auto mb-6 flex justify-start">
                 <Link href={`/${restaurant}`} className="group relative z-50">
@@ -107,10 +109,10 @@ export default function MenuClient({ initialPlates, restaurant, restaurantId, is
                         <div className="glass-specular pointer-events-none"></div>
 
                         <div className="glass-content relative w-full h-full overflow-hidden">
-                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-orange-200/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out"></div>
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[color:color-mix(in_srgb,var(--primary-color),white_80%)]/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out"></div>
 
                             <svg
-                                className="absolute inset-0 m-auto w-8 h-8 text-orange-600 z-[9999]"
+                                className="absolute inset-0 m-auto w-8 h-8 text-[var(--primary-color)] z-[9999]"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="2 0 24 24"
@@ -145,7 +147,7 @@ export default function MenuClient({ initialPlates, restaurant, restaurantId, is
                     {/* Loading Indicator */}
                     {isLoading && (
                         <div className="flex justify-center items-center py-8">
-                            <div className="animate-spin rounded-full h-12 w-12 border-4 border-orange-200 border-t-orange-600"></div>
+                            <div className="animate-spin rounded-full h-12 w-12 border-4 border-[color:color-mix(in_srgb,var(--primary-color),white_80%)] border-t-[var(--primary-color)]"></div>
                         </div>
                     )}
 

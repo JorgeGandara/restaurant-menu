@@ -16,7 +16,9 @@ export const RESTAURANT_BY_SLUG = groq`
     googleMapsUrl,
     videoHowToArrive,
     typography,
+    primaryColor,
     backgroundImage,
+    favicon,
     "slug": restaurant->slug.current,
     "restaurantId": restaurant._ref
   }
@@ -32,9 +34,9 @@ export const PLATES_BY_RESTAURANT = groq`
     description,
     price,
     image,
-    category,
+    "category": coalesce(category->name, category),
     recipe
-  }
+  } | order(category asc)
 `;
 
 export const ADMIN_PLATES_BY_RESTAURANT = groq`
@@ -45,9 +47,9 @@ export const ADMIN_PLATES_BY_RESTAURANT = groq`
     _id,
     name,
     price,
-    category,
+    "category": coalesce(category->name, category),
     recipe
-  }
+  } | order(category asc)
 `;
 
 export const PLATE_BY_ID = groq`
@@ -57,7 +59,7 @@ export const PLATE_BY_ID = groq`
     description,
     recipe,
     price,
-    category
+    "category": coalesce(category->name, category)
   }
 `;
 

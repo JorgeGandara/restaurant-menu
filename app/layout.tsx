@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { 
+import {
   Playfair_Display,
   Bebas_Neue,
   Cormorant,
@@ -20,28 +20,28 @@ import imageUrlBuilder from "@sanity/image-url";
 // ============================================
 // FUENTES ELEGANTES
 // ============================================
-const playfair = Playfair_Display({ 
+const playfair = Playfair_Display({
   subsets: ['latin'],
   variable: '--font-playfair',
   weight: ['400', '500', '600', '700', '800', '900'],
   display: 'swap',
 });
 
-const cormorant = Cormorant({ 
+const cormorant = Cormorant({
   subsets: ['latin'],
   variable: '--font-cormorant',
   weight: ['300', '400', '500', '600', '700'],
   display: 'swap',
 });
 
-const lora = Lora({ 
+const lora = Lora({
   subsets: ['latin'],
   variable: '--font-lora',
   weight: ['400', '500', '600', '700'],
   display: 'swap',
 });
 
-const crimson = Crimson_Text({ 
+const crimson = Crimson_Text({
   subsets: ['latin'],
   variable: '--font-crimson',
   weight: ['400', '600', '700'],
@@ -51,28 +51,28 @@ const crimson = Crimson_Text({
 // ============================================
 // FUENTES MODERNAS
 // ============================================
-const montserrat = Montserrat({ 
+const montserrat = Montserrat({
   subsets: ['latin'],
   variable: '--font-montserrat',
   weight: ['300', '400', '500', '600', '700', '800'],
   display: 'swap',
 });
 
-const poppins = Poppins({ 
+const poppins = Poppins({
   subsets: ['latin'],
   variable: '--font-poppins',
   weight: ['300', '400', '500', '600', '700'],
   display: 'swap',
 });
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
   weight: ['300', '400', '500', '600', '700'],
   display: 'swap',
 });
 
-const nunito = Nunito({ 
+const nunito = Nunito({
   subsets: ['latin'],
   variable: '--font-nunito',
   weight: ['300', '400', '500', '600', '700'],
@@ -82,21 +82,21 @@ const nunito = Nunito({
 // ============================================
 // FUENTES IMPACTANTES
 // ============================================
-const bebas = Bebas_Neue({ 
+const bebas = Bebas_Neue({
   subsets: ['latin'],
   variable: '--font-bebas',
   weight: ['400'],
   display: 'swap',
 });
 
-const oswald = Oswald({ 
+const oswald = Oswald({
   subsets: ['latin'],
   variable: '--font-oswald',
   weight: ['300', '400', '500', '600', '700'],
   display: 'swap',
 });
 
-const righteous = Righteous({ 
+const righteous = Righteous({
   subsets: ['latin'],
   variable: '--font-righteous',
   weight: ['400'],
@@ -106,7 +106,7 @@ const righteous = Righteous({
 // ============================================
 // FUENTES ARTESANALES
 // ============================================
-const dancing = Dancing_Script({ 
+const dancing = Dancing_Script({
   subsets: ['latin'],
   variable: '--font-dancing',
   weight: ['400', '500', '600', '700'],
@@ -129,23 +129,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // Obtén las configuraciones de Sanity
-  const settings = await client.fetch(
-    `*[_type == "restaurantSettings" && restaurant->slug.current == "tmm-restaurant"][0]{
-      backgroundImage,
-      typography
-    }`
-  );
-
-  const backgroundImageUrl = settings?.backgroundImage
-    ? urlFor(settings.backgroundImage).url()
-    : null;
-
-  const typography = settings?.typography || {};
-  const fontFamily = typography.fontFamily || "var(--font-montserrat)";
-  const fontSize = typography.fontSize || "16px";
-  const fontWeight = typography.fontWeight || 400;
-
   return (
     <html
       lang="es"
@@ -164,29 +147,7 @@ export default async function RootLayout({
         ${dancing.variable}
       `}
     >
-      <head>
-        <style dangerouslySetInnerHTML={{
-          __html: `
-            * {
-              font-family: ${fontFamily} !important;
-            }
-            body {
-              font-family: ${fontFamily} !important;
-              font-size: ${fontSize} !important;
-              font-weight: ${fontWeight} !important;
-            }
-          `
-        }} />
-      </head>
-      <body
-        style={{
-          backgroundImage: backgroundImageUrl
-            ? `url(${backgroundImageUrl})`
-            : undefined,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
+      <body>
         {children}
 
         {/* SVG global reutilizable */}
